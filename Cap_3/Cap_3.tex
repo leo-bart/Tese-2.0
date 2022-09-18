@@ -1,0 +1,432 @@
+\chapter{Formulação de elementos finitos para os trilhos}
+
+A formulação em coordenadas nodais absolutas, ANCF, é uma maneira de escrever as equações de movimento de corpos
+flexíveis usando uma discretização por elementos finitos. Seja um corpo flexível qualquer $\mathcal{K}$ discretizado
+na forma de $n$ elementos finitos $e_1,e_2,...,e_n$. Na ANCF considera-se que a posição de qualquer ponto do elemento
+$e_i$ no sistema inercial de coordenadas $\vec{r}$ possa ser dada por uma interpolação adequada
+das posições nodais $\vec{q}$. A relação entre $\vec{r}$ e $\vec{q}$ é dada pelo operador linear cuja matriz é $\vec{S}$, 
+que contém as funções de forma dependentes das coordenadas locais $\left(\xi,\eta,\zeta\right)$:
+\begin{equation}
+    \vec{r} = \vec{S}\left(\xi,\eta,\zeta\right) \left(\vec{q} +\vec{q}_{0}\right) = \vec{S}\left(\xi,\eta,\zeta\right) \vec{q}_T
+    \label{eq: posi_ANCF}
+\end{equation}
+em que $\vec{q}_{0}$ corresponde às condições iniciais das coordenadas nodais. Assume-se, a partir deste ponto,
+que a descrição da posição do ponto $P$ seja dada pelas coordenadas locais \textit{na posição de referência} o
+que encaixa esta abordagem em uma descrição Lagrangeana do movimento.
+
+Nota-se que $\vec{S}$ não tem relação com o tempo. Por consequência, a velocidade e a aceleração 
+do ponto em questão ficam:
+\begin{align}
+    \dot{\vec{r}} = \vec{S}\left(\xi,\eta,\zeta\right) \dot{\vec{q}} \label{eq: vel_ANCF} \\
+    \ddot{\vec{r}} = \vec{S}\left(\xi,\eta,\zeta\right) \ddot{\vec{q}} \label{eq: acel_ANCF}
+\end{align}
+o que torna essa abordagem bastante concisa em termos de representação das quantidades cinemáticas 
+do movimento.
+
+De maneira análoga, a primeira variação das velocidades é
+\begin{equation}
+    \delta'\dot{\vec{r}} = \vec{S}\left(\xi,\eta,\zeta\right) \delta'\dot{\vec{q}} \label{eq: vari_velo_nodal}
+\end{equation}
+
+Para o corpo flexível, assim como ocorreu para o corpo rígido, vale o princípio de Jourdain. A
+Eq.~\eqref{eq:Princípio de Jourdain} é repetida abaixo para o elemento $e$, mas na forma de
+esforços sobre um elemento infinitesimal, seguindo uma abordagem de mecânica do contínuo \cite{lai_introduction_2010,bittencourt_computational_2015}:
+\begin{equation}
+    \int_{e}{\left(\rho\ddot{\vec{r}} - \nabla{}\cdot\vec{\sigma} - \vec{b}\right) \delta'\dot{\vec{r}} dV} = 0
+\end{equation}
+que pode ser separada nos termos
+\begin{equation}
+    \int_{e}{\rho\ddot{\vec{r}} \delta'\dot{\vec{r}} dV} - \int_{e}{\left(\nabla{}\cdot\vec{\sigma}\right) \delta'\dot{\vec{r}} dV} - \int_{e}{\vec{b} \delta'\dot{\vec{r}} dV} = 0 \label{eq: jourdain_ANCF}
+\end{equation}
+em que $\vec{b}$ é o campo de forças atuantes (gravidade, por exemplo), o operador $\cdot$ denota produto interno entre dois vetores e $\nabla{}\cdot\vec{\sigma}$ é a divergência do tensor de tensões de Cauchy:
+\begin{equation}
+    \nabla{}\cdot\vec{\sigma} = \frac{\partial\sigma_{ij}}{\partial x_j}\vec{e}_i
+\end{equation}
+
+O primeiro termo da Eq.~\eqref{eq: jourdain_ANCF} representa os esforços inerciais do corpo e gerarão, como será visto mais à frente, a matriz de inércia do elemento; o segundo termo representa as tensões internas e superficiais (aplicadas por agentes externos); 
+o terceiro agrega campos de força aos quais o elemento possa estar submetido (gravidade, campo magnético etc.).
+
+Finalmente, a integração da Eq.~\eqref{eq: jourdain_ANCF} é feita com base nos diferenciais de volume total não deformado do elemento, $dV$, e de sua
+superfície externa, $d\Gamma$, usando as coordenadas do sistema global. As funções de forma, no entanto, são definidas em intervalos de coordenadas
+próprias dos elementos $\vec{\xi}$ tais que $\xi_j \in [-1;1]$. Para fazer, então, as integrações com base no sistema de coordenadas próprias,
+é necessário fazer uma transformação dos limites de integração e a correspondente conversão dos valores de $dV$ e $d\Gamma$ para, respectivamente,
+$dv$ e $d\gamma$ com o uso das matrizes
+jacobianas de transformação de volume $\vec{J}_0$ e de superfície $\vec{J}_{S0}$, que serão detalhadas mais adiante, de modo que a equação de movimento na forma fraca é reescrita como:
+\begin{equation}
+    \int_{e}{\rho\ddot{\vec{r}} \delta'\dot{\vec{r}} J_0 dv} - \int_{e}{\left(\nabla{}\cdot\vec{\sigma}\right) \delta'\dot{\vec{r}} J_0 dv} - \int_{e}{\vec{b} \delta'\dot{\vec{r}} J_0 dv} = 0 \label{eq: jourdain_ANCF local}
+\end{equation}
+em que $J_0=\det(\vec{J}_0)$.
+
+\section{Determinação das forças nodais}
+O termo de tensões da Eq.~\eqref{eq: jourdain_ANCF local},
+\begin{equation}
+    \int_{e}{\left(\nabla{}\cdot\vec{\sigma}\right) \delta'\dot{\vec{r}} J_0 dv}
+\end{equation}
+representa a integral de volume de uma divergência multiplicada por uma função vetorial.
+
+Aplicando integração por partes e, posteriormente, o teorema de Gauss (da divergência), tal termo pode ser reescrito como
+a seguinte soma de uma integral de volume com outra de superfície \cite{hughes_finite_2000,bittencourt_computational_2015}:
+\begin{equation}
+    \int_{e}{\left(\nabla{}\cdot\vec{\sigma}\right) \delta'\dot{\vec{r}} J_0 dv}=
+    - \int_{e}{\vec{\sigma}:\left(\nabla{\delta'\dot{\vec{r}}}\right) J_0 dv} +
+    \int_{\Gamma^{(e)}}{\vec{\sigma}\vec{n} \cdot \delta'\dot{\vec{r}} J_{S0} d\gamma} \label{eq: tensoes integral}
+\end{equation}
+em que $J_{S0} = \det(\vec{J}_{S0})$ é o determinante da matriz jacobiana da transformação da superfície externa do
+elemento em coordenadas próprias para coordenadas locais.
+
+A contração tensorial $\int_{e}{\vec{\sigma}:\left(\nabla{\delta'\dot{\vec{r}}}\right) J_0 dv}$ corresponde aos esforços de tensão
+internos ao elemento, que podem ser traduzidos em termos de forças e momentos nodais $\vec{f}^{(e)}$. Tais esforços, por sua vez, 
+podem ser deduzidos a partir da energia potencial de deformação $U^{(i)}$ por meio da relação
+\begin{equation}
+    \vec{f}^{(e)} = \frac{\partial U^{(i)}}{\partial \vec{q}} \label{eq: f nodais 1}
+\end{equation}
+
+Admitindo-se pequenas deformações e material elástico-linear, a forma da energia de deformação do elemento $i$ é
+\begin{equation}
+    U^{(e)} = \frac{1}{2} \int_{e} {\vec{\varepsilon}:\vec{D}:\vec{\varepsilon} J_0 dV}
+\end{equation}
+onde $\vec{D}$ corresponde ao tensor constitutivo e $\vec{\varepsilon}$ é o tensor das medidas de deformação de Green-Lagrange.
+Da Eq.~\eqref{eq: f nodais 1} e usando a propriedade de simetria dos tensores envolvidos,
+\begin{equation}
+    \vec{f}_i^{(e)} = \int_{e} {\vec{\varepsilon}:\vec{D}:\frac{\partial \vec{\varepsilon}}{\partial \vec{q}} J_0 dV} \label{eq: f nodais 2}
+\end{equation}
+
+O tensor de deformações de Green-Lagrange pode ser obtido a partir do gradiente de 
+deformações $\vec{F} = \frac{\partial \vec{r}}{\partial \vec{r}_0}$ por meio da relação
+\begin{equation}
+    \vec{\varepsilon} = \frac{1}{2}\left(\vec{F}^T\vec{F} - \vec{I}\right) = \frac{1}{2}\left(\vec{C} - \vec{I}\right)
+    \label{eq: tensor def Lagrange}
+\end{equation}
+onde $\vec{C}$ é o tensor direito de medidas de deformação de Cauchy-Green.
+
+Como a posição absoluta dos pontos internos ao elemento dependem das variáveis locais $\vec{\xi}$,
+o tensor $\vec{F}$ pode ser escrito como:
+\begin{equation}
+    \vec{F} = \frac{\partial \vec{r}}{\partial \vec{\xi}} \frac{\partial \vec{\xi}}{\partial \vec{r}_0} = \vec{J}\vec{J}_0^{-1}
+\end{equation}
+onde $\vec{J}(\vec{r})$ é a matriz jacobiana de $\vec{r}$ em relação a $\vec{\xi}$,
+\begin{equation} \vec{J} = \begin{bmatrix} 
+        S_{x,\xi}\vec{q}_T & S_{x,\eta}\vec{q}_T & S_{x,\zeta}\vec{q}_T \\
+        S_{y,\xi}\vec{q}_T & S_{y,\eta}\vec{q}_T & S_{y,\eta}\vec{q}_T \\
+        S_{z,\xi}\vec{q}_T & S_{z,\eta}\vec{q}_T & S_{z,\eta}\vec{q}_T
+\end{bmatrix}  \label{eq:jaco 3D} \end{equation}
+e 
+\begin{equation} \vec{J}_0 = \begin{bmatrix} 
+        S_{x,\xi}\vec{q}_0 & S_{x,\eta}\vec{q}_0 & S_{x,\zeta}\vec{q}_0 \\
+        S_{y,\xi}\vec{q}_0 & S_{y,\eta}\vec{q}_0 & S_{y,\eta}\vec{q}_0 \\
+        S_{z,\xi}\vec{q}_0 & S_{z,\eta}\vec{q}_0 & S_{z,\eta}\vec{q}_0
+\end{bmatrix}  \label{eq:jaco0 3D} \end{equation}
+
+A partir do fato que $\vec{q}_T = \vec{q} + \vec{q}_0$, a Eq.\eqref{eq:jaco 3D} pode ser lida de outro modo como
+\begin{equation} \vec{J} = \begin{bmatrix} 
+        S_{x,\xi}\vec{q} & S_{x,\eta}\vec{q} & S_{x,\zeta}\vec{q} \\
+        S_{y,\xi}\vec{q} & S_{y,\eta}\vec{q} & S_{y,\eta}\vec{q} \\
+        S_{z,\xi}\vec{q} & S_{z,\eta}\vec{q} & S_{z,\eta}\vec{q}
+\end{bmatrix} + \vec{J}_0 \label{eq:jaco 3D 2} \end{equation}
+
+Nas Eqs.~\eqref{eq:jaco 3D} e \eqref{eq:jaco0 3D}, $\vec{S}_{x,\xi} = \frac{\partial \vec{S}_x}{\partial \xi}$ e assim por
+diante, com $\vec{S}_k, k=x,y,z$, correspondendo às três linhas da matriz de funções de forma.
+
+Sejam, agora, $\vec{H}=\vec{J}_0^{-1}$, $\vec{W}=\frac{\partial \vec{S}}{\partial \vec{\xi}}$ e 
+\begin{equation}
+    \vec{Q} = \begin{bmatrix}
+        \vec{q} & \vec{0}   & \vec{0}  \\
+        \vec{0}   & \vec{q} & \vec{0}  \\
+        \vec{0}   & \vec{0}   & \vec{q}
+    \end{bmatrix}
+\end{equation}
+Com isso, a Eq.~\eqref{eq:jaco 3D 2} fica
+\begin{equation} \vec{J} = \vec{W}\vec{Q} + \vec{J}_0 \label{eq:jaco 3D 3} \end{equation}
+e o tensor direito de Cauchy-Green pode ser escrito como
+\begin{equation}
+    \vec{C} = \left(\vec{H}^T\vec{Q}^T\vec{W}^T + \vec{I}\right)\left(\vec{W}\vec{Q}\vec{H} + \vec{I}\right) \label{eq: tensor CG}
+\end{equation}
+A substituição da relação \eqref{eq: tensor CG} em \eqref{eq: tensor def Lagrange} resulta em
+\begin{equation}
+    \vec{\varepsilon} = \frac{1}{2} \left(\vec{H}^T\vec{Q}^T\vec{W}^T\vec{W}\vec{Q}\vec{H} + \vec{W}\vec{Q}\vec{H} +  \vec{H}^T\vec{Q}^T\vec{W}^T\right)
+\end{equation}
+e o tensor das derivadas parciais de $\vec{\varepsilon}$ em relação às coordenadas generalizadas $\vec{q}$, por sua vez, é de terceira ordem e pode ser descrito
+por
+\begin{equation}
+    \varepsilon'_{ij,m} = \frac{\partial \varepsilon_{ij}}{\partial q_m} = \vec{H}^T \vec{Q}^T
+            \vec{W}^T\vec{W}
+            \frac{\partial \vec{Q}}{\partial q_m} \vec{H} + 
+            \vec{W}
+            \frac{\partial \vec{Q}}{\partial q_m} \vec{H}+
+            \vec{H}^T
+            \frac{\partial \vec{Q}^T}{\partial q_m} \vec{W}^T \label{eq: taxa cauchy}
+\end{equation}
+
+Note-se que $\frac{\partial \vec{Q}}{\partial q_m}$ funciona como um ``seletor'', uma vez que
+\begin{equation}
+    \frac{\partial Q_{ij}}{\partial q_m} = 
+    \begin{cases}
+        1, \text{se } i=m \And j=1 \\
+        1, \text{se } i=m+2N-1 \And j=2 \\
+        1, \text{se } i=m+3N-2 \And j=3 \\
+        0, \text{outros casos}
+    \end{cases}, \label{eq: dQdq}
+\end{equation}
+com $N$ sendo o número de coordenadas nodais.
+
+Finalmente, cada um dos $m$ componentes forças nodais internas dos elementos fica:
+\begin{equation}
+    f_{m}^{(e)} = \int_{e} {\varepsilon_{ij} D_{ijkl} \varepsilon'_{kl,m} J_0 dV} \label{eq: f nodais 3}
+\end{equation}
+
+Nota-se, a partir da Eq.~\eqref{eq: taxa cauchy} e da característica do tensor $\frac{\partial Q_{ij}}{\partial q_m}$,
+dada pela Eq.~\eqref{eq: dQdq}, que a variação temporal da taxa de medida de deformação se deve apenas às componentes 
+da matriz $\vec{Q}$, relativas ao deslocamento
+das coordenadas nodais. 
+
+\section{Integração seletiva reduzida dos esforços internos}
+Como observado anteriormente, uma das maneiras encontradas para reduzir o efeito de travamento por cisalhamento
+é o uso de integral reduzida seletiva. Nesse método, o tensor constitutivo do material é separado em termos 
+relacionados aos esforços normais $\vec{D}_0$ e cisalhantes $\vec{D}_\nu$, de modo que:
+\begin{equation}
+    \vec{D} = \vec{D}_0 + \vec{D}_\nu
+\end{equation}
+
+É claro que a aplicação dessa separação do tensor constitutivo diretamente na Eq.~\ref{eq: eq_mov_final} e a
+posterior integração completa dessa equação não implicam em mudança em termos de resultado matemático, uma vez
+que apenas se separam as integrais em somas parciais. Para que a estratégia de integração reduzida seletiva tenha o efeito desejado, 
+ou seja, que reduza a tendência de travamento por cisalhamento, é necessário que a integral da componente associada
+a $\vec{D}_\nu$ seja feita apenas ao longo da linha neutra, considerando-se, assim, uma distribuição homogênea dos
+esforços de cisalhamento ao longo da seção transversal do elemento. Sabe-se, no entanto, que para uma viga esbelta ideal
+tal distribuição de tensões cisalhantes é parabólica, de modo que é necessária a aplicação de um fator de correção
+$k_s$ que tem como função garantir que a soma das forças de cisalhamento $df_s$ ao longo da seção no caso da integração seletiva
+reduzida (em que $df_s$ é suposto constante) seja a mesma da distribuição parabólica \cite{gere_mecanica_2003}.
+
+Com isso, os esforços elásticos podem ser obtidos por meio da seguinte relação:
+\begin{align}
+        \vec{f}^{(e)}   =& \frac{LHW}{8}\int_{\xi^\star}\int_{\eta^\star}\int_{\zeta^\star}{ \left(\frac{ \partial \vec{\varepsilon}}{\partial \vec{q}^{(e)}} : \vec{D}_0 : \vec{\varepsilon} \right) J_0 d\zeta^\star d\eta^\star d\xi^\star} + \nonumber\\
+        & + A^{(e)}\frac{L}{2}\int_{\xi^\star}{ \left(\frac{ \partial \vec{\varepsilon}}{\partial \vec{q}^{(e)}} : \vec{D}_\nu : \vec{\varepsilon} \right)  J_0 d\xi^\star}\label{eq: full elastic force vector}
+\end{align}
+com $\xi^\star = \xi/L$, $\eta^\star = \eta/H$, $\zeta^\star = \zeta/W$.
+
+Numericamente, as integrais da Eq.~\eqref{eq: full elastic force vector} podem ser calculadas por técnicas de quadratura, como as de Gauss e Lobatto \cite{gerstmayr_efficient_2005}.
+
+\section{Esforços externos}
+Os esforços externos aos elementos são dados pelos dois últimos termos da Eq.~\eqref{eq: eq_mov_final}:
+\begin{align}
+     \vec{f}_{e}^{(e)} &= \int_{\Gamma^{(i)}}{\vec{S}(\vec{\xi})^T \vec{t} J_{S0} d\gamma} \\
+     \vec{f}_{b}^{(e)} &= \int_{e}{\vec{S}(\vec{\xi})^T \vec{b} J_{0} dv}
+\end{align}
+com $\vec{f}_{e}^{(e)} $ sendo forças (pontuais ou distribuídas) aplicadas à superfície externa do elemento e $\vec{f}_{b}^{(e)}$ sendo forças
+volumétricas, devido a campos na região em que se encontra o elemento.
+
+\subsection{Forças gravitacionais}
+    As forças gravitacionais podem ser incluídas no modelo substituindo-se o vetor $\vec{b}=\vec{g}\rho$, 
+em que $\vec{g}$ indica a aceleração do campo gravitacional. Supondo que a variação de tal campo é desprezível
+nas imediações do elemento e que o material é homogêneo, chega-se a:
+\begin{equation}
+    \vec{f}_{b/g}^{(e)} = \left[\int_{e}{\vec{S}(\vec{\xi})dV }\right]^T \vec{g} \rho J_0
+\end{equation}
+
+\subsection{Forças de restrição}
+    Assim como foi feito com a dedução dos esforços de restrição para o caso de um sistema  multicorpos rígidos (seção~\ref{sec: sistemas_restritos}),
+o vetor de pressões externas $\vec{t}$ pode ser divido em suas componentes ativa (que exerce potência) e passiva (que não exerce potência). A componente
+passiva $\vec{t}_p$ decorre das restrições $\vec{\Phi}$ impostas ao elemento em questão e pode ser escrita como proporcional à matriz jacobiana dessas restrições
+\begin{equation}
+    \vec{t}_p = \vec{\Phi}_{\vec{x}}^T d\vec{\lambda}
+\end{equation}
+onde $d\vec{\lambda}$ são os multiplicadores de Lagrange associados às restrições aplicadas em uma área infinitesimal $d\Gamma$ do elemento.
+
+    Com isso, as forças de restrição aplicadas ao corpo podem ser calculadas por:
+\begin{equation}
+    \vec{f}_{(e/p)} = \int_{\Gamma^{(i)}}{\vec{S}(\vec{\xi})^T \vec{\Phi}_{\vec{x}}^T d\vec{\lambda} J_{S0} d\gamma}
+\end{equation}
+
+    Essa expressão é simplificada se o ponto de restrição estiver sobre um nó $k$ do elemento:
+\begin{equation}
+    \vec{f}_{(e/p)}^{(k)} = {J_{S0}\vec{S}(\vec{\xi}_k)^T \vec{\Phi}_{\vec{x}}^T\vec{\lambda}  } = \bar{\vec{\Phi}}_{\vec{x}}^T\vec{\lambda} 
+\end{equation}
+
+    A partir da expressão anterior, nota-se que a estrutura das equações de movimento \eqref{eq:equações aumentadas um corpo}
+pode ser utilizada para o cálculo das forças de restrição.
+
+\section{Matriz de massa}
+O primeiro termo da Eq.~\eqref{eq: jourdain_ANCF local} representa os termos de inércia. 
+Substituindo-se as Eqs.~\eqref{eq: vari_velo_nodal} e \eqref{eq: acel_ANCF}, tem-se o seguinte formato para esse termo:
+\begin{equation}
+    \delta'\vec{q}^T\int_{e}{\vec{S}^T \vec{S}\ddot{\vec{q}} \rho J_0 dv}
+\end{equation}
+e como o integrando não depende das coordenadas nodais,
+\begin{equation}
+    \delta'\vec{q}^T\left[\int_{e}{\vec{S}^T \vec{S} \rho J_0 dv}\right]\ddot{\vec{q}} = \delta'\vec{q}^T\vec{M}^{(e)}\ddot{\vec{q}}
+\end{equation}
+em que $\vec{M}^{(i)}$ é a matriz de massa do elemento $e$.
+
+Admitindo um corpo com densidade uniforme e invariável no tempo, o que é uma hipótese razoável para corpos feitos
+de aço operando em temperaturas até \SI{200}{\celsius}, pode-se notar que a matriz de massa do corpo flexível descrito
+pela formulação em coordenadas nodais absolutas é \textbf{constante}, não dependendo do tempo nem das coordenadas
+generalizadas.
+
+\section{Funções de forma}
+As funções de forma, condensadas na matriz $\vec{S}$, são utilizadas para interpolar as posições intermediárias entre os nós do elemento 
+segundo a Eq.~\eqref{eq: posi_ANCF}. A escolha dessas funções é intimamente ligada ao número de graus de liberdade de cada nó 
+da malha de elementos finitos, bem como é restrita pela necessidade de tais funções serem linearmente independentes entre si,
+de modo a fazerem parte de uma base que gere o espaço das funções reais contínuas $\mathcal{C}(\mathbb{R})$.
+
+Os elementos de viga em coordenadas nodais absolutas tridimensionais inicialmente propostos por \citeonline{shabana_three_2001} possuíam doze
+graus de liberdade por nó: três coordenadas de posição, e nove coordenadas indicando a derivada da posição em relação ao sistema
+global de coordenadas, ou seja, as inclinações. Para a versão do elemento de comprimento inicial $L$ com dois nós, os autores citados propuseram a seguinte matriz 
+de funções de forma:
+\begin{equation}
+    \vec{S}_{SY} = \begin{bmatrix}
+        S_1\vec{I} & S_2\vec{I} & S_3\vec{I} & S_4\vec{I} & S_5\vec{I} & S_6\vec{I} & S_7\vec{I} & S_8\vec{I}
+    \end{bmatrix}    
+\end{equation}
+em que $\vec{I}$ é uma matriz identidade $3\times 3$ e 
+\begin{align}
+    S_1 &= 1-3\xi^2+2\xi^3 & S_2 &= L(\xi-2\xi^2+\xi^3) \\
+    S_2 &=L(\eta-\xi\eta) & S_4 &= L(\zeta-\xi\zeta) \\
+    S_5 &= 3\xi^2-2\xi^3 & S_6 &= L(-\xi^2+\xi^3) \\
+    S_7 &= L\xi\eta & S_8 &= L\xi\zeta
+\end{align}
+
+Note-se, portanto, que as funções de \citeauthoronline{shabana_three_2001} são cúbicas ao longo do comprimento e lineares na interpolação
+das coordenadas da seção transversal. Adicionalmente, o elemento de dois nós possui 24 graus de liberdade. No entanto, o uso das inclinações
+como coordenadas nodais leva a esforços resistentes ao cisalhamento excessivamente altos, o que provoca
+o fenômeno de travamento em cisalhamento (\textit{shear locking}), que usualmente é reduzido pelo uso de integração seletiva. 
+Isso ocorre porque a distribuição das tensões de cisalhamento ao longo da 
+seção transversal da viga é parabólica e o uso de funções de forma lineares leva a distribuições dessas tensões que são lineares também. Esse
+fato foi observado por \citeonline{sopanen_description_2003}, que adicionalmente mostraram que ao utilizar uma relação do 
+tipo $U = \frac{1}{2}\vec{q}^T\vec{K}\vec{q}$ para a energia de deformação do elemento é possível desacoplar as deformações normais das
+cisalhantes, o que reduz resultados incorretos associados ao travamento em cisalhamento.
+
+Com vistas a reduzir o efeito de travamento e melhorar a performance dos elementos de viga em formulação de coordenadas nodais absolutas,
+\citeonline{nachbagauer_new_2011} adotaram a descrição das coordenadas nodais com um conjunto diferente de parâmetros daquele sugeridos inicialmente
+por \citeauthoronline{shabana_three_2001}. Nesse modelo, cada nó $(i)$ do elemento tem nove, ao invés de doze, graus de liberdade:
+\begin{itemize}
+    \item três coordenadas $\vec{q}_{r}^{(i)}$ indicando a posição espacial do nó;
+    \item três coordenadas $\vec{q}_{\eta}^{(i)}$ indicando o vetor associado a um dos eixos da seção transversal naquele nó;
+    \item outras três coordenadas $\vec{q}_{\zeta}^{(i)}$ que indicam o vetor associado ao outro eixo (inicialmente perpendicular ao anterior) da seção transversal no nó.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \asyinclude{Cap_3/Figuras/elemento_nachba.asy}
+    \caption{Definição do elemento com três nós com os graus de liberdade nodais propostos por \citeonline{nachbagauer_structural_2013}. Os vetores $\vec{q}_{r0}^{(1)}$ e $\vec{u}^{(1)}$ indicam a posição inicial e o deslocamento do nó número 1 do elemento. Os vetores $\vec{q}_{\eta 0}^{(3)}$ e $\vec{q}_{\zeta 0}^{(3)}$ estão associados à orientação inicial da seção transversal do nó 3. O ponto $O$ indica a origem do sistema de coordenadas.\label{fig: element definition}}
+\end{figure}
+
+Neste caso, cada nó é descrito pelo seguinte conjunto de coordenadas generalizadas:
+\begin{equation}
+    \vec{q}^{(i)} = \begin{bmatrix}
+        \vec{q}_{r}^{(i)} & \vec{q}_{\eta}^{(i)} & \vec{q}_{\zeta}^{(i)}
+    \end{bmatrix} \label{eq: coord_nodais_nachba}
+\end{equation}
+
+A Fig.~\ref{fig: element definition} mostra um elemento com três nós e com os graus de liberdade propostos acima. Para essa configuração, 
+foi proposto o uso de elementos lineares \cite{matikainen_elimination_2010,nachbagauer_new_2011}, compostos de dois nós nas extremidades, e de elementos quadráticos \cite{nachbagauer_structural_2013}, com um nó intermediário. A seguir são dadas as funções de forma de
+cada um desses dois tipos de elementos, admitindo que na configuração não deformada, o comprimento do elemento é $L$ e a seção transversal é retangular com altura $H$ e largura $W$. Assume-se, ainda, que os lados do retângulo estejam inicialmente paralelos aos eixos de orientação da seção.
+
+\begin{figure}[ht]
+    \centering
+    \include{Cap_3/Figuras/nos_elementos.tex}
+    \caption{Elementos (a) lineares e (b) quadráticos utilizados. Apenas duas dimensões são apresentadas para simplificar a representação gráfica. As tabelas indicam
+    os valores iniciais das posições dos elementos nas coordenadas próprias dos elementos.}
+    \label{fig: line_quad_elements}
+\end{figure}
+
+\subsection{Funções de forma dos elementos lineares}
+Para os elementos lineares (Fig.~\ref{fig: line_quad_elements}a), contendo os nós (1) e (2) e considerando a Eq.~\eqref{eq: coord_nodais_nachba},o vetor de coordenadas nodais é:
+\begin{equation}
+    \vec{q}_L^{(e)} = \begin{bmatrix}
+        \vec{q}^{(1)} & \vec{q}^{(2)}
+    \end{bmatrix}
+\end{equation}
+
+A matriz de funções de forma é dada por:
+\begin{equation}
+    \vec{S}_{L} = \begin{bmatrix}
+        S_1\vec{I} & S_2\vec{I} & S_3\vec{I} & S_4\vec{I} & S_5\vec{I} & S_6\vec{I}
+    \end{bmatrix}    
+\end{equation}
+com
+\begin{align}
+    S_1 &= \frac{1}{2}(1-\xi) & S_2 &= \frac{H}{2}\eta S_1 & S_3 &= \frac{W}{2}\zeta S_1 \\
+    S_4 &= \frac{1}{2}(1+\xi) & S_5 &= \frac{H}{2}\eta S_4 & S_6 &= \frac{W}{2}\zeta S_4
+\end{align}
+
+\subsection{Funções de forma dos elementos quadráticos}
+Para os elementos quadráticos (Fig.~\ref{fig: line_quad_elements}b), contendo os nós terminais (1) e (3), o nó intermediário (2) e considerando a Eq.~\eqref{eq: coord_nodais_nachba},o vetor de coordenadas nodais é:
+\begin{equation}
+    \vec{q}_L^{(e)} = \begin{bmatrix}
+        \vec{q}^{(1)} & \vec{q}^{(2)} &  \vec{q}^{(3)}
+    \end{bmatrix}
+\end{equation}
+
+A matriz de funções de forma é dada por:
+\begin{equation}
+    \vec{S}_{L} = \begin{bmatrix}
+        S_1\vec{I} & S_2\vec{I} & S_3\vec{I} & S_4\vec{I} & S_5\vec{I} & S_6\vec{I} & S_7\vec{I} & S_8\vec{I} & S_9\vec{I}
+    \end{bmatrix}    
+\end{equation}
+com
+\begin{align}
+    S_1 &= - \frac{\xi}{2}(1-\xi) & S_2 & = \frac{H}{2}\eta S_1 & S_3 & = \frac{W}{2}\zeta S_1 \\
+    S_4 &= 1-\xi^2 & S_5 & = \frac{H}{2}\eta S_4 & S_6 & = \frac{W}{2}\zeta S_4 \\
+    S_7 &= \frac{\xi}{2}(1+\xi) & S_8 & = \frac{H}{2}\eta S_7 & S_9 & = \frac{W}{2}\zeta S_7 \\
+\end{align}
+
+
+
+\section{Elementos de trilhos}
+
+Os elementos finitos descritos anteriormente, baseados em mecânica do contínuo a partir dos trabalhos de \citeonline{shabana_absolute_1997,matikainen_elimination_2010,gerstmayr_absolute_2004,nachbagauer_structural_2013},
+entre outros, considera a seção transversal das vigas como retangular. A adoção de seções não retangulares, de formato
+arbitrário, é possível desde que os limites de integração da Eq.~\eqref{eq: eq_mov_final} sejam adequadamente ajustados.
+É claro que quanto mais complexa a forma da seção transversal, mais complicada será a resolução das equações de movimento
+e, portanto, mais tempo computacional será demandado.
+
+Nesta seção será apresentada uma aproximação da seção transversal de um trilho ferroviário por meio de retângulos,
+o que simplifica sobremaneira a dedução das matrizes de massa e rigidez tangente do elemento, acelerando os cálculos.
+
+O desenho à esquerda da Fig.~\ref{fig:rail coordinate} mostra um trilho ferroviário de perfil TR-68 típico com o sistema de coordenadas $\eta^\star,\zeta^\star$
+utilizado para descrever a seção transversal. Note-se que as três regiões principais do trilho (patim, alma e boleto) possuem 
+seções aproximadamente retangulares, o que sugere uma simplificação mostrada à direita da Fig.~\ref{fig:rail coordinate}. As três
+subdivisões adotadas são indicadas por subescritos, sendo \textit{f} para o patim, \textit{w} para a alma e \textit{h} para o boleto. 
+As dimensões originais são substituídas pelas equivalentes alturas e larguras
+\begin{itemize}
+    \item $h_f$ e $w_f$ para o patim;
+    \item $h_w$ e $w_w$ para a alma e
+    \item $h_h$ e $w_h$ para o boleto.
+\end{itemize}
+
+A altura total, chamada aqui de $H$ para corresponder à notação utilizada na definição dos elementos retangulares, apresentados anteriormente,
+é a soma das alturas parciais:
+\begin{equation}
+    H = h_f + h_w + h_b
+\end{equation}
+
+A largura total da seção é igual à largura do patim:
+\begin{equation}
+    W = w_f
+\end{equation}
+
+\begin{figure}[h]
+    \centering
+    \include{Cap_3/Figuras/fig_rail.tex}
+    \caption{Orientação do sistema de coordenadas do perfil de trilho (exemplificado com um trilho perfil TR-68)
+    e seção transversal equivalente simplificada.}
+    \label{fig:rail coordinate}
+\end{figure}
+
+A partir dessa subdivisão da seção nominal do trilho em três retângulos, a equação de cálculo das forças nodais internas, originalmente
+definida pela Eq.~\eqref{eq: full elastic force vector}, pode ser aplicada separadamente a cada uma das subseções.
+\begin{align}
+    \begin{split}
+        \vec{f}^{(e)}   =& \frac{L h_f w_f}{8} \int_{-1}^{1}\int_{-1}^{1}\int_{-1}^{\zeta^\star_f}{ \left(\frac{ \partial \vec{\varepsilon}}{\partial \vec{q}^{(e)}} : \vec{D}_0 : \vec{\varepsilon} \right) \det(\vec{J_0}) d\zeta^\star d\eta^\star d\xi^\star} + \\
+            & + \frac{L h_w w_w}{8} \int_{-1}^{1}\int_{-1}^{1}\int_{\zeta^\star_f}^{\zeta^\star_h}{ \left(\frac{ \partial \vec{\varepsilon}}{\partial \vec{q}^{(e)}} : \vec{D}_0 : \vec{\varepsilon} \right) \det(\vec{J_0}) d\zeta^\star d\eta^\star d\xi^\star} + \\
+            & + \frac{L h_h w_h}{8} \int_{-1}^{1}\int_{-1}^{1}\int_{\zeta^\star_h}^{1}{ \left(\frac{ \partial \vec{\varepsilon}}{\partial \vec{q}^{(e)}} : \vec{D}_0 : \vec{\varepsilon} \right) \det(\vec{J_0}) d\zeta^\star d\eta^\star d\xi^\star} + \\
+            & + A^{(e)}\frac{L}{2}\int_{-1}^{1}{ \left(\frac{ \partial \vec{\varepsilon}}{\partial \vec{q}^{(e)}} : \vec{D}_\nu : \vec{\varepsilon} \right) \det(\vec{J_0}) d\xi^\star}
+    \end{split}
+    \label{eq: rail elastic force vector}
+\end{align} 
+em que as versões com $\star$ das coordenadas próprias dos elementos estão escalonadas para o intervalo $[-1,1]$ e os limites de integração são:
+\begin{equation}
+    \zeta^\star_f = -1 + 2\frac{h_f}{H} \qquad\text{ e}\qquad \zeta^\star_h = 1 - 2\frac{h_h}{H}
+\end{equation}
+
+Novamente, as integrais da Eq.~\eqref{eq: rail elastic force vector} podem ser resolvidas numericamente com o uso de técnicas de quadratura.

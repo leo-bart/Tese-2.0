@@ -1,0 +1,432 @@
+\chapter{Metodologia experimental}
+
+
+
+\section{Introdução}
+Em toda pesquisa experimental devem se estabelecer os \textit{fatores},
+definidos como aquelas variáveis independentes, controláveis pelo
+experimentador, e identificar as \textit{respostas} que representam as
+variáveis que serão medidas \cite{barros_neto_como_2010}. O fim de uma
+campanha experimental será observar o comportamento das respostas em função
+da combinação dos diferentes \textit{níveis} aos que os fatores são
+estabelecidos.\par
+
+N
+\begin{itemize}
+	\item Perfil axial de temperatura instantânea;
+	\item Perfil axial de pressão no leito;
+	\item Massa instantânea
+	\item Composição molar dos gases de combustão emitidos
+\end{itemize}
+
+A partir da leitura de elas serão determinados os parâmetros de desempenho
+da combustão das misturas de biomassas.\par
+
+Neste capítulo são apresentadas as principais características do sistema
+experimental que será empregado para observar o comportamento da combustão
+de biomassa em leito fixo. Também será discutida a estratégia 
+experimental que será abordada, de forma que a informação coletada durante
+a campanha de experimentos seja da melhor qualidade estatística possível.
+%Apesar da alta quantidade de trabalhos achados na literatura,
+%são limitados os trabalhos focados em avaliar o rendimento da combustão de
+%misturas de resíduos agrícolas em função dos efeitos nas variações
+%simultâneas dos seus parâmetros principais visando estabelecer critérios
+%para serem aplicados em caldeiras industriais de leito fixo.\par 
+
+\section{Descrição da bancada experimental}
+A montagem experimental que será empregada neste estudo é mostrada na
+a Figura \ref{Cap3-Fig-Reactor_Experimental}. Ela está composta pelos
+seguintes sistemas: acondicionamento e transporte do ar de alimentação (ar
+primário), a câmara de combustão, exaustão de fumaças, medição e
+adquisição. A seguir é apresentada uma descrição de cada dos sistemas que
+conformam a bancada experimental.\par
+%El montaje experimental que será empleado en este estudio es
+%esquemáticamente mostrado en la figura \ref{Cap3-Fig-Reactor_Experimental}.
+%Ele está compuesto por el sistema de acondicionamiento y transporte del
+%aire de alimentación, la cámara de combustión, el sistema de expulsión de
+%gases, el sistema de medición y el sistema de adquisición. A continuación
+%se hace una descripción de cada una de estas partes del montaje:\par
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{Cap_3/Figuras/Diagrama_Montaje_Experimental-Completo}
+	\caption{Esquema do reator experimental de leito fixo}
+	\label{Cap3-Fig-Reactor_Experimental}
+\end{figure}
+
+\subsection{Sistema de acondicionamento e transporte do ar de alimentação}
+
+
+\subsection{Câmara de combustão}
+
+\subsection{Sistema de medição}
+A temperatura local do leito, a queda local na pressão, temperatura no
+freeboard, composição molecular dos gases de combustão e a massa
+instantânea do leito serão monitoradas durante cada experimento e
+posteriormente usadas para estimar os parâmetros de desempenho da combustão
+do leito de biomassa. A configuração dos instrumentos de medição
+destinados ao monitoramento de cada variável são descritos a seguir:\par
+%Las variables, que serán medidas para ser empleadas en la estimación de los
+%parámetros de rendimiento de la combustión del lecho de biomasa, son la
+%temperatura local del lecho, caída local de presión, temperatura en el
+%freeboard, concentración de gases de combustión y masa instantánea del
+%lecho. La configuración de los dispositivos de medición destinados al
+%monitoramento de cada variable son descritos a continuación:\par
+
+
+\begin{figure}
+	\centering
+	\includegraphics[angle=90,width=\textwidth]{Cap_3/Figuras/diagramaSondaMuestreo}
+	\caption{Esquema da sonda de amostragem e linha de acondicionamento
+	para análise da composição dos gases de combustão}
+	\label{Cap3-Fig-Sonda}
+\end{figure}
+
+O fluxo de gases viaja pela sonda de amostragem de aço inoxidável até
+chegar a um trocador de calor contendo um banho de óleo \textbf{XXX},
+mantido a 160 $^\circ$C. O material que resulte condensado durante a
+passagem do gás pelo trocador, é armazenado numa trampa de condensado. Um
+filtro de particulado, conetado na saída do trocador de calor, remove toda
+partícula presente nos gases antes de eles passarem por uma mangueira isotérmica, que
+mantem a temperatura dos gases a 160 $^\circ$C no seu trajeto através dela (2
+m). Assim, busca-se evitar que parte do material volátil condensável mude
+de fase, de forma que possibilite a detecção da sua concentração no
+FTIR.\par
+
+Na saída do FTIR, os gases atravessarão por um segundo estagio de resfriamento,
+onde atingirão uma temperatura ao redor de 60 $^\circ$C, separando todo
+material condensável da fase gasosa. Nessas condições, e mediante um
+by-pass, parte do fluxo de gases será dirigido para a célula de oxigênio.
+Finalmente, os gases residuais serão expulsados na atmosfera por uma bomba
+de vácuo \textbf{XXX}, responsável pela sucção através da linha de
+amostragem.\par
+%El flujo de gases viaja por la sonda de muestreo de acero inxodable hasta
+%llegar a un intercambiador de calor con un baño térmico de aceite XXX,
+%mantenido a 160 $^\circ$. El material que resulte condensado durante el
+%paso del gas por el intercambiador, es alojado en una trampa de condensado.
+%Luego del intercambiador de calor, el material particulado en el gas es
+%removido por un filtro XXXX antes de ingresar a una línea isotérmica, que
+%mantiene la temperatura del gas a 160 $^\circ$C a lo largo de su extensión
+%(2 m). De esta forma se busca evitar que parte del material volátil
+%condensable cambie de fase, de manera que se pueda detectar su
+%concentración en el analizador FTIR. A la salida del FTIR, lo gases pasan
+%por una segunda etapa de enfriamiento, donde alcanzarán una temperatura
+%alrededor de 60 $^\circ$C, separando todo material condensable de la fase
+%gaseosa. En estas condiciones, y a través de un bypass, parte del flujo de
+%gases es dirigido a la célula de oxígeno. Finalmente los gases residuales
+%son expulsados a la atmósfera por una bomba de vacío \textbf{XXX}, la cual
+%es responsable de la succión a través de la línea de muestreo.\par
+
+\subsection{Sistema de exaustão}
+Os gases de combustão são sugados para o duto de exaustão, em direção à
+chaminé, através do ventilador de exaustão localizado acima do reactor.
+%Los gases emitidos durante el experimento ingresan por una coifa debido a
+%la succión suministrada por el exhaustor localizado aguasarriba. A través
+%del ducto de escape, los gases son expulsado a la atmósfera por una
+%chimenea localizada en la parte superior del edificio donde se encuentra el
+%laboratorio.\par
+
+\subsection{Sistema de adquisição}
+Todas as sinais emitidas pelos instrumentos de medição, incluindo as
+temperaturas medidas nos terminais do aquecedor de ar, são enviadas para um
+conjunto de placas de adquisição NOVUS. Esses elementos transformam as
+sinais analógicas recebidas a digitais, para posteriormente enviar a
+informação a um computador, armazenando os dados em disco.
+%Todas las señales emitidas por los instrumentos de medición, incluyendo las
+%temperaturas medidas en los terminales del calentador del aire de
+%alimentación, son enviadas inicialmente a un arreglo de placas de
+%adquisición NOVUS. Este arreglo convierte las señales analógicas recibidas
+%en digitales para las cuales pueden ser recibidas por un ordenador, donde
+%los resulatos serán almacenados para posteriores análisis.
+
+\section{Biomassas empregadas}
+%En este trabajo serán estudiadas las características de combustión en lecho
+%fijo de residuos de la industria sucroalcoholera (bagaso y palha) y el
+%efecto de su mezcla en diferentes concentraciones.\par
+
+As amostras de palha e bagaço foram obtidas da Usina da Pedra localizada no
+município de Serrana, estado de São Paulo, onde é praticada a coleta
+mecanizada dos colmos de cana-de-açúcar. A palha separada é densificada
+através de enfardamento para ser posteriormente levada à usina onde é
+integrada ao processo de cogeração de energia, junto com o bagaço. Estas
+biomassas têm sido objeto de estudo em outros trabalhos desenvolvidos por
+membros do Laboratório de Processos Térmicos Industriais (PROTEA) da
+Faculdade de Engenharia Mecânica da Unicamp
+\cite{TesFranco2018,TesRamirez2019}, de maneira que as suas características
+físico-químicas principais já foram determinadas e são apresentadas nas
+tabelas \ref{Cap3-Tab-Biomasas} y \ref{Cap3-Tab-Granulometria}.\par
+%Las muestras de palha y bagaso fueron obtenidas de la Usina da Pedra,
+%localizada en el municipio de Serrana, estado de San Pablo, donde se
+%practica la colecta mecanizada de los colmos. La palha separada es
+%densificada a través de enfardamento para ser levada à usina donde es
+%integrada al proceso de cogeneración de energia junto al bagaço. Estas
+%biomasas han sido obtejo de estudio de otros trabajos desarrollados por
+%miembros del Laboratorio de Processos Térmicos Industriais (PROTEA) de la
+%Facultad de Ingeniería Mecânica en la Unicamp
+%\cite{TesFranco2018,TesRamirez2019}, de manera que sus características
+%fisicoquímicas principales son conocidas y son presentadas en las tablas
+%\ref{Cap3-Tab-Biomasas} y \ref{Cap3-Tab-Granulometria}.\par
+
+\input{Cap_3/Tablas/Tab-Biomasas}
+
+\citeonline{TesRamirez2019} determinou as distribuições populacionais (em
+base úmida) dos tamanhos das partículas em ambas biomassas, comparando a
+conhecida metodologia de separação granulométrica por peneiramento com
+outra técnica baseada no arrasto pneumático das partículas. Os resultados
+obtidos mostraram que as fracções mássicas das amostras separadas por
+elutriação, em ambas as biomassas, apresentam uma distribuição normal, a
+diferença de aquelas obtidas por peneiramento, que não apresentam
+normalidade, portanto dificultando a inferência estadística por métodos
+convencionais \cite{BookMendenhallEtAl2013}. Um teste de Shapiro-Wilk sobre
+os dados obtidos pelos métodos de peneiramento e elutriação, para o caso do
+bagaço, apresentou, para um nível de significância do 5\%, p-valores de
+1.93x10$^{-5}$ e 0.87, respetivamente\footnote{Resultados obtidos para o
+teste sobre a hipótese que a amostra provem de uma população normalmente
+distribuída.}. Em vista disso, em este trabalho serão consideradas as
+distribuições mássicas obtidas pelo método de separação pneumática, em
+condições de equilíbrio, apresentadas na Tabela
+\ref{Cap3-Tab-Granulometria}. As características físicas destas frações
+serão tomadas da tese feita por \citeonline{TesRamirez2019}.\par
+%Las distribuciones poblacionales (en base másica) de tamaños de las
+%partículas en ambas biomasas fueron obtenidas por \cite{TesRamirez2019},
+%que comparó la ya conocida metodología de separación granulométrica por
+%tamizado con otra técnica basada en el arrastre neumático de partículas.
+%Los resultados obtenidos mostraron que las distribuciones de tamaños de las
+%muestras separadas por elutriación en ambas biomasas presentan una
+%tendencia normal, a diferencia de las obtenidas a través del uso de
+%tamices, que no presenta normalidad, por tanto dificultando la inferencia
+%estadística por métodos convencionales. Un test de Shapiro-Wilk sobre los
+%datos obtenidos por los métodos de tamices y de elutriación, en el caso del
+%bagaso, presentó, para un nivel de seguridad del 95\%, p-valores de
+%1.93x10$^{-5}$ y 0.87, respectivamente\footnote{Resultados obtenidos para
+%el test sobre la hipótesis que la muestra oroviene de una población
+%normalmente distribuída}. Debido a esto, en este trabajo
+%serán consideradas las distribuciones obtenidas por el método de separación
+%neumática para el bagaso y la palha, en condiciones como recibidas,
+%presentadas en la Tabla \ref{Cap3-Tab-Granulometria}.\par
+
+\input{Cap_3/Tablas/Tab-Granulometria}
+
+Uma dificuldade apresentada em este trabalho está dada pela limitada
+quantidade de biomassas disponíveis. Uma estimação aproximada indica que
+existe material suficiente para 30 experimentos em total, considerando que
+as amostras usadas em cada um deles são de quantidade considerável (\~2 kg
+de material/ensaio). Os resultados obtidos poderiam ser afeitados se a
+quantidade de experimentos disponíveis resultem ineficientes devido a um
+planejamento experimental errado, a ensaios defeituosos ou a selecção
+inadequada nos níveis dos fatores. Para resolver este problema, foi
+considerado um planejamento experimental que é exposto na seguinte secção.
+%Una dificultad que se presenta en este trabajo es dada por la aparente
+%limitada cantidad de biomasa disponible en el PROTEA para explorar los
+%objetivos propuestos. Una estimación aproximada indica que existe
+%suficiente material para realizar 30 experimentos en su totalidad. Esto
+%considerando que las muestras usadas en cada experimento son de
+%considerable extensión (\~2 kg de material/ensayo). Los resultados
+%obtenidos podrían verse gravemente afectados si la cantidad de experimentos
+%disponibles resulte ineficiente por malas planificaciones experimentales
+%debido a ensayos defectuosos o selección inadeucada emn los niveles de los
+%factores. Para resolver este problema se realizó un diseõ experimental que
+%será expuesto en la siguiente sección.
+
+\section{Proposta experimental}
+Em esta tese serão avaliados os efeitos do fluxo de ar primário e sua
+temperatura no processo de combustão de bagaço de cana-de-açúcar, aliás, o
+efeito da adição de palha, a diferentes concentrações, também será
+estudado. Dada a limitada quantidade de material disponível para realizar
+ensaios, foi necessário desenvolver um planejamento experimental. Duas
+alternativas experimentais, para a obtenção dos resultados que serão
+analisados, são propostas. Cada alternativa está baseada em um delineamento
+central composto rotacional (CCDR) \cite{BookRodriguezIemma2005}, porém, se
+diferenciam entre si pela forma como os fatoras são variados.\par
+%En esta tesis serán evaluados los efectos del flujo de aire de
+%alimentación y su temperatura en el proceso de combustión del bagaço de
+%cana-de-açucar, además, el efecto de la adición de palha a diferentes
+%concentraciones también será estudiado. Dado la limitada cantidad de
+%material disponible para realizar ensayos, fue necesario realizar un diseño
+%expermental. Dos alternativas experimentales, para la obtenicón de los
+%resultados que serán analizados en esta tesis, son propuestas. Cada una de
+%ellas está basado en un delineamiento central compuesto rotacional (CCDR),
+%sin embargo, se diferencian en la forma como los factores serán variados. 
+
+\subsection{Análise do efeito na variação de U$_{\text{a}}$ e
+[\%Palha]$_{\text{mass}}$ + Efeito de T$_{\text{ar}}$}
+Em este esquema experimental, só seriam inicialmente considerados os
+efeitos da velocidade de alimentação do ar e a concentração em massa da
+palha em misturas com bagaço. Posteriormente, após de analisar os
+resultados gerados, uma região com melhores comportamentos será
+identificada. Esta condição para U$_a$ e \%[Palha]$_{\text{mass}}$ será
+fixada para experimentos a diferentes temperaturas de aquecimento no ar de
+alimentação, portanto avaliando o seu efeito na combustão em misturas de
+biomassa.\par
+%En este esquema experimental sólo sería inicialmente considerados los
+%efectos de la velocidad de alimentación del aire y la concentración en masa
+%de palha en una mezcla con bagaço. Posteriormente, luego de analizar los
+%resultados obtenidos, una región de mejores comportamientos será estimada.
+%Esta condicion para $U_a$ y $[\%Palha]_{mass}$ serán fijadas para
+%experimentos a diferentes temperaturas en el aire de alimentación, de esta
+%forma midiendo su efecto en la combustión de la mezcla de biomasas.
+
+A eleição dos fatores iniciais é feita dado que se considera que o grau de
+dispersão nas respostas será maior para cada tipo de combustível queimado
+-- cada mistura pode comporta-se de maneira diferente as outras. No caso da
+temperatura do ar, como foi apresentado no Capítulo anterior, o seu efeito
+na combustão mantem a mesma tendência geral, até que a temperatura atingir
+valores cercanos ao ponto de ignição do material volátil liberado. A
+capacidade de aquecimento do aquecedor de ar está por embaixo desse limite,
+de modo que o efeito da temperatura do ar primário poderia ser analisado
+para o caso da mistura que apresentar um desempenho na sua combustão mais
+provavelmente localizado numa região de melhor desempenho, definida através
+da comparação dos resultados obtidos.\par
+%La elección de las variables iniciales se hace dado que se considera que el
+%grado de dispersión en las respuestas será mayor en el tipo de combustible
+%quemado; cada mezcla de las dos biomasas puede comportarse de manera
+%diferente a las demás. En el caso de la temperatura del aire, como se
+%presentó en el capítulo anterior, su efecto en la combustión mantiene la
+%misma tendencia general, hasta que la temperatura alcanza valores cercanos
+%al punto de ignición del material volátil liberado. La capacidad de
+%calentamiento máxima del equipo experimental está por debajo de la segunda
+%condición, de modo que el efecto de la temperatura podría ser analizado
+%para el caso de la mezcla que presente el desempeño en su combustión más
+%probablemente localizado en una región óptima.
+
+Os experimentos serão realizados seguindo um CCDR com dois fatores, somando
+11 ensaios que abrangerão todo o domínio experimental dos fatores. Sobre a
+região de melhor desempenho escolhida, mais três experimentos serão feitos
+entre 50 e 150 $^\circ$C, os quais são identificados como OC$_\text{U}$ e
+OC$_\text{C}$.
+
+Adicionalmente, um ensaio com palha pura será tomado como referência.
+Assim, se teria um total de 15 experimentos, deixando material disponível
+para mais 15 ensaios. Esses ensaios adicionais poderiam ser destinados ao
+refinamento da região de análise inicial, medir efeitos em níveis
+intermediários e repetições, o que fornecerá resultados com  menores
+erros.\par
+%Los experimentos serán hechos siguiendo un CCDR con dos factores, sumando
+%11 ensayos que cubren todo el dominio experimental de los factores. Sobre
+%la región de mejor desempeño, definidos como $OC_U$ y $OC_C$, tres
+%experimentos más serán hechos entre 50 y  150 $^\circ$. Adicionalmente, un
+%ensayo con palha pura será realizado como referencia. De esta forma se
+%tendrían inicalmente un total de 15 experimentos, dejando disponible
+%material para 15 ensayos más. Estos ensayos adicionales puede ser
+%destinados a refinar la región de análisis inicial, medir los efectos en
+%niveles intermedios y la realización de repeticiones, permitiendo menores
+%errores en los resultandos finales.
+
+Na Tabela \ref{Cap3-Tab-2Fac} é apresentado um resumo dos experimentos que
+seriam feitos sobe esta metodologia. A ordem dos experimentos será definida
+aleatoriamente. Na Tabela, os níveis apresentados para cada fator na região
+de análise, são definidos em uma base normalizada sobre o intervalo de
+análise respectivo.
+%La tabla \ref{Cap3-Tab-2Fac}  presenta un resumen de los experimentos que
+%serían realizados bajo esta metodología. El orden de estos experimentos
+%será dado de forma aleatoria, de manera que sean bajas las probabilidades
+%de posibles errores sistemáticos. En esta tabla, los niveles de cada
+%factor en la región de análisis son definididos en una base normalizada
+%sobre el intervalo respectivo.
+
+\input{Cap_3/Tablas/Tab-DosFactores}
+
+\subsection{Análise do efeito combinado das variações de U$_{\text{a}}$,
+[\%Palha]$_{\text{mass}}$ e T$_{\text{ar}}$ -- delineamento fatorial
+completo 2$^3$}
+Em este esquema, é proposta uma metodologia experimental baseada num
+CCDR com três fatores e 6 níveis, dando um total de 17 experimentos
+\cite{BookRodriguezIemma2005}. Este
+número de experimentos corresponderia a ensaios realizados em pontos
+extremos, somando 8; pontos sobre cada eixo axial que passa pelo centro da
+região de estudo (+6); e três experimentos sobre o ponto central do domínio
+experimental (ver Tabela \ref{Cap3-Tab-3Fac}). Isto deixaria material
+suficiente para mais 13 experimentos que podem se usar para avaliar regiões
+intermediárias e na realização de réplicas para a redução de erros
+experimentais que possam afeitar as análises posteriores.\par
+%Para este fin, es propuesta una metodología experimental basada en un
+%delineamiento central compuesto rotacional con tres factores y 6 niveles,
+%dando un total de 17 experimentos. Este número de experimentos corresponde
+%a ensayos realizados en puntos extremos, sumando 8; sobre puntos sobre ejes
+%axiales al centro de la región de estudio, 6; y tres experimentos tomados
+%sobre el punto central de la región (ver Tabla \ref{Cap3-Tab-3Fac}). Esto dejaría material
+%suficiente para 13 experimentos más que pueden emplearse en regiones
+%intermedias y en réplicas para la estimación más precisa de errores
+%experimentales que puedan afectar los resultados.\par
+
+\input{Cap_3/Tablas/Tab-TresFactores}
+
+A vantagem de este procedimento é que são avaliadas as respostas em função
+de variações nos três fatores, simultaneamente, não obstante, isto poderia
+acarrear a necessidade de considerável quantidade de experimentos
+adicionais durante o progresso de refinamento da região de análise,
+deixando menor margem de erro para possíveis ensaios defeituosos.\par
+%La ventaja de este procedimiento es que al mismo tiempo se evalúan las
+%respuestas en función de los tres factores, sin embargo, esto podría recaer
+%en la necesidad de considerable cantidad de experimentos adicionales
+%durante el proceso de refinamiento de la región de análisis, dejando menos
+%margen de error para posibles ensayos defectuosos.
+
+\subsection{Selecção dos níveis nos fatores}
+As velocidades do ar de alimentação são principalmente função da velocidade
+de rotação do motor do ventilador. A máxima velocidade escolhida será
+aquela fornecida perlo ventilador a 3465 rpm e medida na placa de orifício
+no sistema de transporte do ar de alimentação. Por outro lado, o nível
+inferior na velocidade será a mínima a partir que a combustão do leito
+progressa com uma propagação estável do frente de ignição. Esta condição
+será obtida através de experimentos preliminares com amostras separadas de
+bagaço e palha, sendo seleccionado o maior valor medido em ambas
+biomassas.\par
+%Las velocidades del aire de alimentación, estarán principalmente en función
+%del número de revoluciones por minuto (rpm) con que el eje del ventilador de
+%alimentación gira. La máxima velocidad escogida será aquella suministrada
+%por el ventilador a 3465 rpm y medida por la placa de orificio en el
+%sistema de tranporte del aire de alimentación. Por otro lado, la menor
+%velocidad considerada será la mínima a partir de la cual la combustión de
+%una muestra de biomasa presente la propagación estable del frente de
+%ignición. Esta condición será obtenida a través de experimentos
+%preliminares con muestras separadas de bagaço y palha, seleccionándose el
+%mayor valor de los flujos medidos de ambas biomasas.\par
+
+Para o caso da concentração em massa da palha, os níveis avaliados
+correspondem às condições de 0 e 50\% em massa total da mistura. Ademais,
+um experimento com palha pura será feito para o nível meio de velocidade de
+alimentação sem preaquecimento do ar. Os resultados obtidos em esse
+experimento serão tomados como referência de comparação.\par
+%En el caso de la concentración en masade palha, los niveles evaluados
+%corresponderán a las condiciones de 0\% y 50\%. Basado en \textbf{XXXX}. Además, un
+%experimento adicional con solo palha será realizado al nivel medio de velocidad
+%de alimentación y a temperatura ambiente. Los rsultados obtenidos en este
+%experimento serán tomados como referencia de comparación.\par
+
+Finalmente, a temperatura no ar primário estará limitada pelos níveis
+correspondentes à temperatura ambiente (não preaquecimento) e 150
+$^\circ$C.
+%Finalmente,la temperatura en el aire de alimentación estará acotada por la temperatura
+%ambiente y 150 $^\circ$C.
+
+\section{Resultados esperados}
+Através dos dados obtidos na campanha experimental proposta e a posterior
+determinação e análise dos parâmetros característicos da combustão das
+biomassas avaliadas, espera-se contribuir ao atual conhecimento ao redor da
+geração de bioenergia através de combustão de biomassa residual
+principalmente em três aspetos:
+\begin{enumerate}
+	\item Consolidar o estado de conhecimento atual das características
+		que envolvem a propagação do frente de combustão de leitos
+		de partículas sólidas mediante a produção de um artigo de
+		revisão sistemática.
+	\item Apesar do histórico uso dos resíduos do processamento da
+		cana-de-açúcar no Brasil e no mundo, o conhecimento que se
+		tem sobre o processo de combustão em reatores de leito fixo
+		é limitado. Portanto, um dos principais aportes desse
+		trabalho será estender esse umbral, de forma que tanto os
+		dados e conclusões obtidas possam fornecer informação útil
+		tanto a pesquisadores da área como a operadores e
+		projetistas sobre o melhores práticas para o aproveitamento
+		desses resíduos.
+	\item Uma característica inovadora neste trabalho será o uso dos
+		perfis de queda de pressão ao longo do leito para o estudo
+		do frente de chama e as mudanças que acontecem nas
+		características físicas do leito durante a sua propagação.
+		Pretende-se assim, publicar ao menos mais um artigo onde
+		serão discutidas as principais descobertas nessa pesquisa,
+		com foco especial nas variações das características
+		fluidodinâmicas do leito, portanto ampliando o panorama que
+		se tem sobre a combustão de materiais sólidos.
+\end{enumerate}

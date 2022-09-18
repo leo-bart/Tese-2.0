@@ -1,0 +1,39 @@
+\begin{tikzpicture}[x=1mm,y=1mm]
+        % ELIPSE DE CONTATO
+        \draw[thick] (-50,0) ellipse [x radius=10, y radius = 5];
+        \draw[-stealth] (-55,0) -- (-35,0) node[anchor=west]{$\xi$};
+        \draw[-stealth] (-50,-2) -- (-50,8) node[anchor=south]{$\eta$};
+        \node () at (-50,-20) {(a)};
+
+        % CÍRCULO EQUIVALENTE
+        \begin{scope}[scale=2.5,shift={(10,0)}]
+            \draw[thick,dashed] (0,0) ellipse [x radius=10, y radius = 10];
+            \draw[-stealth,thin] (11,0) -- (15,0) node[anchor=west]{$\xi'$};
+            \draw[-stealth,thin] (0,11) -- (0,15) node[anchor=south]{$\eta'$};
+            \node () at (0,-20) {(b)};
+
+            \foreach \y [count=\yi] in {0,2.5,5,7.5}
+                {
+                \draw[] ({sqrt(100-\y*\y)},\y) rectangle ({-sqrt(100-\y*\y)},\y+2.5);
+                \draw[] ({sqrt(100-\y*\y)},-\y) rectangle ({-sqrt(100-\y*\y)},-\y-2.5);
+                \draw[{Circle[length=2pt,sep=-1pt]}-] (0,-10+\y+1.25) -- (11,-10+\y+1.25) node[anchor=west]{$\eta'_\yi$};
+                }
+            \draw[{Circle[length=2pt,sep=-1pt]}-] (0,8.75) -- (11,8.75) node[anchor=west]{$\eta'_8$};
+
+            \draw[ultra thick,-stealth](-5,-17) -- (5,-17) node[midway,anchor=south]{$V$}; 
+        \end{scope}
+
+
+
+        % FATIA
+        \begin{scope}[scale=1.2,shift={(-50,-50)}]
+            \draw[] (-15,-3) rectangle (15,3);
+            \draw[-stealth,thin] (-1,-10) -- (10,-10) node[anchor=west]{$\xi'$};
+            \draw[-stealth,thin] (0,-11) -- (0,-7) node[anchor=west]{$\eta'$};
+
+            \foreach \x in {0,...,10}
+                {\filldraw[black] (15-3*\x,0) circle (1pt) -- +(0,3) node[anchor=south]{\tiny ${\x}$};}
+
+            \node() at (0,-20) {(c)};
+        \end{scope}
+    \end{tikzpicture}

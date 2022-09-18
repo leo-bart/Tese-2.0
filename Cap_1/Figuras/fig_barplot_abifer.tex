@@ -1,0 +1,33 @@
+\begin{tikzpicture}
+        \begin{axis}[
+            width = \textwidth,
+            height=\axisdefaultheight,
+            ybar stacked,
+            bar width=8pt,
+            enlargelimits=0.05,
+            legend style={at={(0.5,-0.20)},
+              anchor=north,legend columns=-1},
+            ylabel={Unidades entregues},
+            xtick=data,
+            x tick label style={rotate=45,anchor=east},
+            ]
+        \addplot+[] table [
+                    col sep=tab,
+                    x=Ano,
+                    y=Carros de passageiros,
+                ] {Cap_1/Figuras/dados_abifer.dat};
+                \addlegendentry{Carros de passageiros}
+        \addplot+[] table [
+                    col sep=tab,
+                    x=Ano,
+                    y index=2,
+                ] {Cap_1/Figuras/dados_abifer.dat};
+                \addlegendentry{Vagões}
+        \addplot+[] table [
+                    col sep=tab,
+                    x=Ano,
+                    y index=3,
+                ] {Cap_1/Figuras/dados_abifer.dat};
+                \addlegendentry{Locomotivas}
+        \end{axis}
+    \end{tikzpicture}

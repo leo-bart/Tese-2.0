@@ -1,0 +1,46 @@
+\begin{tikzpicture}[use Hobby shortcut,scale=1.25]
+    % sistema de coordenadas
+    \draw[-stealth] (0,0) -- (1,0);
+    \draw[-stealth] (0,0) -- (0,1);
+    \draw[-stealth] (0,0) -- (-0.86,-0.5);
+
+
+    % batatoide
+    
+    \begin{scope}[shift={(2,2)}]
+        \path
+          (0,0) coordinate (z0)
+          (1.2,0) coordinate (z1)
+          (1.5,1) coordinate (z2)
+          (-0.2,1) coordinate (z3)
+          (0.1,0.5) coordinate (z4);
+        \coordinate (P) at (0.4,0.0);
+        \coordinate (Q) at (0.55,1.6);
+        \node[left]() at (P) {$P$};
+        \node[left]() at (Q) {$Q$};
+        \draw[thick,{Circle[sep=-2pt]}-stealth] (P) -- (Q) node[midway,right]{$\vec{d}$};
+        \draw[closed,ultra thick] (z0) .. (z1) .. (z2) .. (z3) .. (z4);
+    \end{scope}
+
+    \begin{scope}[shift={(5,1)}, rotate=-20,xscale=1.2,yscale=1.32]
+        \path
+          (0,0) coordinate (z0)
+          (1,0) coordinate (z1)
+          (1.4,1) coordinate (z2)
+          (-0.2,1) coordinate (z3)
+          (0.1,0.5) coordinate (z4);
+        \coordinate (P') at (0.4,0.0);
+        \coordinate (Q') at (0.55,1.6);
+        \node[right]() at (P') {$P'$};
+        \node[right]() at (Q') {$Q'$};
+        \draw[thick,{Circle[sep=-2pt]}-stealth] (P') -- (Q') node[midway,right]{$\vec{d}'$};
+        \draw[closed,ultra thick] (z0) .. (z1) .. (z2) .. (z3) .. (z4);
+    \end{scope}
+
+    \draw[thick,-stealth] (P) -- (P') node[midway,above]{$\vec{u}(\vec{x})$};
+    \draw[thick,-stealth] (Q) -- (Q') node[midway,above]{$\vec{u}(\vec{x}+\vec{d})$};
+
+    \draw[thick,-stealth] (0,0) -- (P) node[midway,right]{$\vec{r}_0$};
+    \draw[thick,-stealth] (0,0) -- (P') node[midway,below]{$\vec{r}$};
+  
+\end{tikzpicture}

@@ -1,0 +1,215 @@
+%ARQUIVO DE PREÂMBULO DA TESE - PACOTES E CONFIGURAÇÕES
+
+\documentclass[12pt, oneside, a4paper, chapter=TITLE, english, brazil, sumario=tradicional, hyphens]{abntex2}
+%	12pt	,  tamanho da fonte
+%	openright,	capítulos começam em página impar
+%	(insere página vazia caso necessário)
+%	oneside,	para impressão somente frente
+%	twoside, para impressão em frente e verso
+%	a4paper,  tamanho do papel.
+% -- ---opções da classe abntex2 ---------------
+%	chapter=TITLE,	títulos de capítulos convertidos em
+%				letras maiúsculas
+%	section=TITLE,	títulos de seções convertidos em letras
+%				maiúsculas
+%	subsection=TITLE,	 títulos de subseções convertidos em
+%				letras maiúsculas
+%	subsubsection=TITLE,	títulos de subsubseções convertidos em
+%					letras maiúsculas
+%	PARA MODIFICAR TÍTULOS PARA  MINÚSCULAS, DEVE-SE SUBSTITUIR
+%	A PALAVRA "TITLE" POR "title"
+% ------ opções do pacote babel ---------------
+%	english,	idioma adicional para hifenização
+%	french,		idioma adicional para hifenização
+%	spanish,	idioma adicional para hifenização
+%	brazil,
+%				O ÚLTIMO IDIOMA ESTABELECE A HIFENIZAÇÃO PRINCIPAL DO DOCUMENTO
+%	sumario=tradicional,
+%	hyphens
+%----------------------------
+%	as figuras e tabelas serão numeradas por capítulos, para numeração contínua, apagar as 	linhas abaixo
+\counterwithin{figure}{chapter} 
+\counterwithin{table}{chapter}
+%---------------------------------------------------------------------------------------
+%Lista de pacotes elementares
+%---------------------------------------------------------------------------------------
+\usepackage[alf, abnt-etal-cite=2, abnt-etal-list=0, abnt-etal-text=emph, abnt-and-type=e, abnt-last-names=bibtex, abnt-emphasize=bf]{abntex2cite}   %PACOTE ABNTEX PARA CITAÇÕES
+%	alf,		citação por autor-data
+% 	abnt-etal-cite=2,  abrevia as citações com mais de dois autores da forma "autor 1 et al."	
+%	abnt-etal-list=0, 	abrevia lista de autores em trabalhos com mais de três autores
+%				na bibliografia
+%	abnt-etal-text=emph,		as palavras "et al." aparecerá na forma \emph{et al.}
+%	abnt-and-type=e, 	usa o "e" para separar último autor
+%	abnt-last-names=bibtex, 	os sobrenomes são tratados como no bibtex	
+%	abnt-emphasize=bf,	títulos de revistas em negrito	
+
+
+
+
+
+
+\usepackage[utf8]{inputenc} 	%caracteres especiais
+\usepackage{amsmath, amssymb, amsfonts, amsthm} % fontes matemáticas para equações
+\usepackage[left=3cm, right=2cm, top=3cm, bottom=2cm, footnotesep=0.5cm]{geometry}
+		% dimensões das margens
+\usepackage[T1]{fontenc}
+\usepackage{graphicx} %inserir figuras e imagens
+\usepackage{indentfirst} % recuo no primeiro parágrafo de casa seção
+\usepackage{times} % mudar fonte do documento para estilo Times
+\usepackage{pdfpages} % permite anexar documentos em formato PDF
+\usepackage{unicamp-fem} % pacote de configuração FEM-UNICAMP
+%---------------------------------------------------------------------------------------
+%PACOTES ACRESCENTADOS PELO USUÁRIO
+\usepackage{multirow} 
+\usepackage{tikz,pgfplots}
+    \usetikzlibrary{calc,
+                    backgrounds,
+                    decorations.pathreplacing,
+                    patterns,
+                    arrows.meta,
+                    calc,
+                    hobby}
+    \pgfplotsset{compat=newest,
+        /pgf/number format/.cd,
+        use comma,
+        1000 sep={}}
+        \pgfdeclarelayer{background}
+        \pgfdeclarelayer{foreground}
+        \pgfsetlayers{background,main,foreground}
+\usepackage{mathtools}
+  \mathtoolsset{showonlyrefs}
+\usepackage{booktabs}
+\usepackage{siunitx}
+    \sisetup{output-decimal-marker = {,},
+            per-mode=symbol,
+            }
+\usepackage[inline]{asymptote}
+\usepackage{multirow,longtable}
+\usepackage{nomencl}
+    \makenomenclature
+\usepackage{enumitem}
+%---------------------------------------------------------------------------------------
+%PACOTES PARA MANUTENÇÃO DO FORMATO (pode ser apagado)
+%\usepackage{verbatim}
+%\usepackage{xcolor}
+\usepackage{lipsum}
+%---------------------------------------------------------------------------------------
+% Configurações de aparência do PDF final
+%	Atraves das seguintes linhas são modificadas as cores nas
+%	citações e links que são impressos no documento final
+%- ALTERAÇÃO DA COR DAS REFERÊNCIAS CRUZADAS E CITAÇÕES
+% -- alterando o aspecto da cor azul
+%\definecolor{blue}{RGB}{41,5,195}
+
+%-- informações do PDF
+\makeatletter
+
+\hypersetup{
+	%As seguintes informações serão estabelecidas nas propriedades do
+	%pdf final
+     	%pagebackref=true,
+	pdftitle={\@title},%Título que sera adotado nas propriedades do pdf
+	pdfauthor={\@author},%Autors que aparecera nas propriedades do pdf
+	pdfsubject={\imprimirpreambulo},%Descripção do pdf 
+	pdfcreator={LaTeX with abnTeX2},
+	pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico},
+	colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=black,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=black,      		% color of file links
+	urlcolor=black,
+	bookmarksdepth=4
+}
+\makeatother
+%--------------------------------------------------------------------------------------
+% CONFIGURAÇÕES DE PACOTES
+%
+\renewcommand{\ABNTEXchapterfont}{\fontfamily{ptm}\fontseries{b}\selectfont}
+\renewcommand{\ABNTEXchapterfontsize}{\large}
+\renewcommand{\ABNTEXsectionfont}{\fontfamily{ptm}\fontseries{b}\selectfont}
+\renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsectionfont}{\fontfamily{ptm}\selectfont}
+\renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+%--------------------------------------------------------------------------------------
+
+%--------------------------------------------------------------------------------------
+% COMANDOS MEUS
+%
+\renewcommand{\vec}[1]{\boldsymbol{\mathrm{#1}}}
+\renewcommand{\sin}{\mathrm{sen\,}}
+\newcommand{\tens}[1]{\vec{#1}}
+\newcommand{\tp}[1]{{#1}^{\mathrm{\scriptscriptstyle T}}}
+\newcommand{\inv}[1]{{#1}^{-1}}
+\providecommand{\sin}{} \renewcommand{\sin}{\hspace{2pt}\textrm{sen}}
+\providecommand{\tan}{} \renewcommand{\tan}{\hspace{2pt}\textrm{tan}}
+
+
+%--------------------------------------------------------------------------------------
+% TIKZ
+%
+\tikzset{
+cota/.style={stealth-stealth, thick}
+                }
+\tikzset{
+suporte/.style = {shorten >= -4 pt, shorten <= 2pt}
+         }
+
+\tikzset{
+    roda/.pic = {
+        \draw[rounded corners = 0.8] (0,0) -- (0,1.8) -- (0.8,2.2) -- (0.8,2.3) --
+            (0.9,2.3) -- (0.9,0) -- 
+            (0.9,-2.3) -- (0.8,-2.3) -- (0.8,-2.2) --
+            (0,-1.8) -- cycle;
+            \draw[thin] (0.8,2.2) -- (0.8,-2.2);
+    }    
+}
+\tikzset{
+    rodeiro/.pic = {
+        \pic[shift={(-4,0)}]{roda};
+        \pic[shift={(4,0)},rotate=180]{roda};
+        \draw (-3.1,0.3) rectangle (3.1,-0.3);
+        \draw[shorten <= -2mm,shorten >= -2mm,dash dot] (-4,0) -- (4,0);
+    }
+}
+
+\tikzset{
+    trilho/.pic = {
+        \draw[thick] (1.233,5.682) arc (-75.964:1.432:5/16) -- (1.449,6.756) arc (1.432:68.597:9/16)
+            arc (68.597:87.134:1.25) arc (87.134:90:14);
+        \begin{scope}[xscale=-1,yscale=1]
+            \draw[thick] (1.233,5.682) arc (-75.964:1.432:5/16) -- (1.449,6.756) arc (1.432:68.597:9/16)
+            arc (68.597:87.134:1.25) arc (87.134:90:14);
+        \end{scope}
+
+    }
+}
+
+\tikzset{
+    trilhoTotal/.pic = {
+        \draw[] (0,0) -- (3-1/16,0) arc (270:360:1/16) -- (3,7/16) arc (0:75.964:1/8) -- 
+            (1.042,0.927) arc (255.964:186.623:3/4) arc (186.623:180:20) arc (180:171.246:8)
+            arc (171.246:139.418:3/4) arc (139.418:104.036:5/16) -- (1.233,5.682)
+            arc (-75.964:1.432:5/16) -- (1.449,6.756) arc (1.432:68.597:9/16) arc (68.597:87.134:1.25) 
+            arc (87.134:90:14);
+            \draw[xscale=-1] (0,0) -- (3-1/16,0) arc (270:360:1/16) -- (3,7/16) arc (0:75.964:1/8) -- 
+            (1.042,0.927) arc (255.964:186.623:3/4) arc (186.623:180:20) arc (180:171.246:8)
+            arc (171.246:139.418:3/4) arc (139.418:104.036:5/16) -- (1.233,5.682)
+            arc (-75.964:1.432:5/16) -- (1.449,6.756) node (A) {} arc (1.432:68.597:9/16) arc (68.597:87.134:1.25) 
+            arc (87.134:90:14);
+    }
+}
+
+\newcommand{\trilhoperfil}[1]{
+    \colorlet{pen}{#1}
+    \draw[pen,thick] (1.233,5.682) arc (-75.964:1.432:5/16) -- (1.449,6.756) arc (1.432:68.597:9/16)
+        arc (68.597:87.134:1.25) arc (87.134:90:14);
+
+}
+\newcommand{\meiotrilho}{
+    \draw[thick, dashed] (0,0) -- (3-1/16,0) arc (270:360:1/16) -- (3,7/16) arc (0:75.964:1/8) -- 
+        (1.042,0.927) arc (255.964:186.623:3/4) arc (186.623:180:20) arc (180:171.246:8)
+        arc (171.246:139.418:3/4) arc (139.418:104.036:5/16) -- (1.233,5.682)
+        arc (-75.964:1.432:5/16) -- (1.449,6.756) arc (1.432:68.597:9/16) arc (68.597:87.134:1.25) 
+        arc (87.134:90:14);
+    \trilhoperfil{red}
+}

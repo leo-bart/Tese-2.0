@@ -1,0 +1,153 @@
+ \chapter{Dedução das forças nodais a partir do princípio dos trabalhos virtuais}
+No que se segue uma dedução alternativa do vetor de forças nodais nos elementos de viga
+em coordenadas nodais absolutas é apresentada. Aqui utiliza-se o princípio das potências
+virtuais como ponto de partida, ao invés da energia de deformação (abordagem que foi utilizada
+no corpo do texto).
+
+Por meio de uma hipótese de pequenos deslocamentos, é possível chegar a uma matriz de rigidez
+constante.
+
+Aplicando-se o teorema da divergência na Eq.~\eqref{eq: jourdain_ANCF}, chega-se a:
+\begin{equation}
+    \delta'\dot{\vec{q}}^T \vec{M}_i \ddot{\vec{q}} + 
+    \int_{e^{(i)}}{\vec{\sigma}:\left(\nabla{\delta'\dot{\vec{r}}}\right) dV} 
+    - \int_{\Gamma^{(i)}}{\vec{\sigma}\vec{n} \cdot \delta'\dot{\vec{r}} d\Gamma} - \int_{e^{(i)}}{\vec{b}\cdot \delta'\dot{\vec{r}} dV} = 0
+\end{equation}
+em que $\Gamma^{(i)}$ indica as regiões da superfície do elemento com vetor normal $\vec{n}$ e que estão 
+sujeitas a condições de contorno de 
+Neumann, ou seja, a tensões externas tais que $\vec{t}=\vec{\sigma}\vec{n}$. Obtém-se, assim:
+\begin{equation}
+    \delta'\dot{\vec{q}}^T \vec{M}_i \ddot{\vec{q}} + 
+    \int_{e^{(i)}}{\vec{\sigma}:\left(\nabla{\delta'\dot{\vec{r}}}\right) dV} 
+    - \int_{\Gamma^{(i)}}{\vec{t} \cdot \delta'\dot{\vec{r}} d\Gamma} - \int_{e^{(i)}}{\vec{b}\cdot \delta'\dot{\vec{r}} dV} = 0
+\end{equation}
+
+Admitindo que o material do elemento é elástico linear, pode-se seguir a dedução de \citeonline[p. 505]{bittencourt_computational_2015}
+para encontrar:
+\begin{equation}
+\begin{split}
+     \delta'\dot{\vec{q}}^T \vec{M}_i \ddot{\vec{q}} + 
+    \int_{e^{(i)}}{\left\{ \frac{\mu}{2} \left[ 
+        \left( \nabla{\vec{u}} + \nabla{\vec{u}}^T \right) : \left( \nabla{\delta'\dot{\vec{r}}} + \nabla{\delta'\dot{\vec{r}}}^T \right)
+        + \lambda \left(\nabla{}\cdot\vec{u}\right) \left(\nabla{}\cdot\delta'\dot{\vec{r}}\right)
+    \right] \right\} dV} +\\
+    - \int_{\Gamma^{(i)}}{\vec{t} \cdot \delta'\dot{\vec{r}} d\Gamma} 
+    - \int_{e^{(i)}}{\vec{b}\cdot \delta'\dot{\vec{r}} dV} = 0
+\end{split} \label{eq: eq_mov_1}
+\end{equation}
+onde $\vec{u}$ é o campo de deslocamentos e $\mu$ e $\lambda$ são os parâmetros de Lamè do material.
+
+Supondo-se pequenas deformações, pode-se obter uma representação matricial da Eq.~\eqref{eq: eq_mov_1} por meio
+do tensor de pequenas deformações de Lagrange escrito em função do operador diferencial
+$\vec{L}$ definido por
+\begin{equation}
+    \vec{L} = \begin{bmatrix}
+        \frac{\partial }{\partial r_{0x}} & 0 & 0 \\
+        0 & \frac{\partial }{\partial r_{0y}} & 0 \\
+        0 & 0 & \frac{\partial }{\partial r_{0z}} \\
+        \frac{\partial }{\partial r_{0y}} & \frac{\partial }{\partial r_{0x}} & 0 \\
+        \frac{\partial }{\partial r_{0z}} & 0 & \frac{\partial }{\partial r_{0x}} \\
+        0 & \frac{\partial }{\partial r_{0z}} & \frac{\partial }{\partial r_{0y}}
+    \end{bmatrix} \label{eq: operador_L}
+\end{equation}
+e da matriz constitutiva $\vec{D}$:
+\begin{equation}
+    \vec{D} = \frac{E}{(1+\nu)(1-2\nu)}\begin{bmatrix}
+        1-\nu & \nu & \nu & 0 & 0 & 0 \\
+        \nu & 1-\nu & \nu & 0 & 0 & 0 \\
+        \nu & \nu & 1-\nu & 0 & 0 & 0 \\
+        0 & 0 & 0 & \frac{1-2\nu}{2} & 0 & 0 \\
+        0 & 0 & 0 & 0 & \frac{1-2\nu}{2} & 0 \\
+        0 & 0 & 0 & 0 & 0 &\frac{1-2\nu}{2}  \\
+    \end{bmatrix} \label{eq: matriz_D}
+\end{equation}
+em que $E$ é o módulo de elasticidade e $\nu$ o coeficiente de Poisson do material. Pela substituição das relações
+\eqref{eq: operador_L} e \eqref{eq: matriz_D} na equação de movimento \eqref{eq: eq_mov_1} obtém-se:
+\begin{equation}
+\begin{split}
+     \delta'\dot{\vec{q}}^T \vec{M}_i \ddot{\vec{q}} + 
+    \int_{e^{(i)}}{\delta'\dot{\vec{r}}^T \vec{L}^T \left(\vec{D}\vec{L}\vec{u}\right)  dV} +\\
+    - \int_{\Gamma^{(i)}}{\vec{t} \cdot \delta'\dot{\vec{r}} d\Gamma} 
+    - \int_{e^{(i)}}{\vec{b}\cdot \delta'\dot{\vec{r}} dV} = 0
+\end{split} \label{eq: eq_mov_2}
+\end{equation}
+
+\begin{figure}[h]
+ \centering
+ \include{Cap_3/Figuras/campo_deslocamentos.tex}
+ \caption{Legenda}
+ \label{fig: campo_deslocamentos}
+\end{figure}
+
+
+Para determinar $\vec{u}$, considerem-se os pontos $P$ e $Q$ cujas posições inicias sejam, inicialmente, 
+separadas pelo vetor $\vec{d}$. O vetor de deslocamento do ponto $P$ em direção à posição final, deformada,
+$P'$ é $\vec{u}=\vec{r}-\vec{r}_0$ (Fig.~\ref{fig: campo_deslocamentos}). Assumindo-se a interpolação dada pela Eq.~\eqref{eq: posi_ANCF}, decorre que:
+\begin{align}
+    \vec{u} &= \vec{S}(\vec{\xi})\cdot\vec{q} \label{eq: campo_desl_ANCF} \\
+    \delta'\dot{\vec{r}} &= \vec{S}(\vec{\xi})\cdot\delta'\dot{\vec{q}} \label{eq: var_velocidades_ANCF}
+\end{align}
+
+Substituindo as expressões anteriores na Eq.~\eqref{eq: eq_mov_2}:
+\begin{equation}
+     \delta'\dot{\vec{q}}^T \left\lbrace \vec{M}_i \ddot{\vec{q}} + 
+    \int_{e^{(i)}}{ \vec{S}(\vec{\xi})^T \vec{L}^T \vec{D}\vec{L}\vec{S}(\vec{\xi})\vec{q}  dV}
+    - \int_{\Gamma^{(i)}}{\vec{S}(\vec{\xi})^T \vec{t} d\Gamma} 
+    - \int_{e^{(i)}}{\vec{S}(\vec{\xi})^T \vec{b} dV}\right\rbrace = 0  \label{eq: eq_mov_3}
+\end{equation}
+
+E, finalmente, como as velocidades virtuais $\delta'\dot{\vec{q}}^T$ são arbitrárias e condizentes com as 
+condições de contorno, chega-se a:
+\begin{equation}
+     \vec{M}_i \ddot{\vec{q}} + 
+    \int_{e^{(i)}}{ \vec{S}(\vec{\xi})^T \vec{L}^T \vec{D}\vec{L}\vec{S}(\vec{\xi})\vec{q}  dV}
+    - \int_{\Gamma^{(i)}}{\vec{S}(\vec{\xi})^T \vec{t} d\Gamma} 
+    - \int_{e^{(i)}}{\vec{S}(\vec{\xi})^T \vec{b} dV} = 0  \label{eq: eq_mov_4}
+\end{equation}
+
+Seja, agora, a matriz $\vec{S}_{,\vec{r}_0} = \vec{L}\vec{S}(\vec{\xi})$. As equações de movimento \eqref{eq: eq_mov_4} ficam:
+\begin{equation}
+     \vec{M}_i \ddot{\vec{q}} + 
+    \left[ \int_{e^{(i)}}{ \vec{S}_{,\vec{r}_0}^T \vec{D} \vec{S}_{,\vec{r}_0}  dV}\right]\vec{q}
+    - \int_{\Gamma^{(i)}}{\vec{S}(\vec{\xi})^T \vec{t} d\Gamma} 
+    - \int_{e^{(i)}}{\vec{S}(\vec{\xi})^T \vec{b} dV} = 0  \label{eq: eq_mov_quase_final}
+\end{equation}
+com
+\begin{equation}
+    \vec{S}_{,\vec{r}_0} = \begin{bmatrix}
+        \frac{\partial \vec{S}_x}{\partial r_{0x}} & \vec{0} & \vec{0} \\
+        \vec{0} & \frac{\partial \vec{S}_y}{\partial r_{0y}} & \vec{0} \\
+        \vec{0} & \vec{0} & \frac{\partial \vec{S}_z}{\partial r_{0z}} \\
+        \frac{\partial \vec{S}_x}{\partial r_{0y}} & \frac{\partial \vec{S}_y}{\partial r_{0x}} & \vec{0} \\
+        \frac{\partial \vec{S}_x}{\partial r_{0z}} & \vec{0} & \frac{\partial \vec{S}_z}{\partial r_{0x}} \\
+        \vec{0} & \frac{\partial \vec{S}_y}{\partial r_{0z}} & \frac{\partial \vec{S}_z}{\partial r_{0y}}
+    \end{bmatrix} \label{eq: matriz_B}
+\end{equation}
+
+
+A consideração de um elemento pré-deformado, ou seja, de formato inicialmente não prismático e não paralelo aos eixos cartesianos 
+pode ser feita 
+com o uso da matriz Jacobiana da transformação linear entre as coordenadas globais iniciais dos nós dos elementos e as coordenadas 
+próprias do elemento.
+\begin{equation} \vec{J}_0 = \begin{bmatrix} 
+        \vec{S}_{x,\xi}\vec{q}_0 & \vec{S}_{x,\eta}\vec{q}_0 & \vec{S}_{x,\zeta}\vec{q}_0 \\
+        \vec{S}_{y,\xi}\vec{q}_0 & \vec{S}_{y,\eta}\vec{q}_0 & \vec{S}_{y,\eta}\vec{q}_0 \\
+        \vec{S}_{z,\xi}\vec{q}_0 & \vec{S}_{z,\eta}\vec{q}_0 & \vec{S}_{z,\eta}\vec{q}_0
+\end{bmatrix} =  \begin{bmatrix} 
+        \vec{S}_{x,\xi} & \vec{S}_{x,\eta} & \vec{S}_{x,\zeta} \\
+        \vec{S}_{y,\xi} & \vec{S}_{y,\eta} & \vec{S}_{y,\eta} \\
+        \vec{S}_{z,\xi} & \vec{S}_{z,\eta} & \vec{S}_{z,\eta}
+\end{bmatrix} \begin{bmatrix}
+    \vec{q}_0 & \vec{0} & \vec{0} \\
+    \vec{0}& \vec{q}_0 & \vec{0} \\
+    \vec{0} & \vec{0} & \vec{q}_0 \\
+\end{bmatrix} = \vec{S}_{,\vec{\xi}}\vec{Q}_0\label{eq:jaco_0_3D} \end{equation}
+
+A relação entre o volume inicial pré-deformado e o volume do elemento de referência, idealmente prismático, é o determinante $J_0=\det{\vec{J}_0}$,
+de modo que a forma final das equações de movimento fica:
+\begin{equation}
+     \vec{M}_i \ddot{\vec{q}} J_0 + 
+    \left[ \int_{e^{(i)}}{ \vec{S}_{,\vec{r}_0}^T \vec{D} \vec{S}_{,\vec{r}_0} J_0 dV}\right]\vec{q}
+    - \int_{\Gamma^{(i)}}{\vec{S}(\vec{\xi})^T \vec{t} J_0 d\Gamma} 
+    - \int_{e^{(i)}}{\vec{S}(\vec{\xi})^T \vec{b} J_0 dV} = 0  \label{eq: eq_mov_final}
+\end{equation}

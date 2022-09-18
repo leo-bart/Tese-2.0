@@ -1,0 +1,40 @@
+\begin{tikzpicture}
+        \begin{scope}[shift={(-5,0)}]
+            \draw[thick](-1,0.5) rectangle (1,-0.5);
+            \draw[-stealth] (0,0) -- (1.5,0) node[right]{$\xi$};
+            \draw[-stealth] (0,0) -- (0,0.75) node[right]{$\eta$};
+            \draw[fill=red,line width=0] (-1,0) circle (0.1) node[anchor=north east]{(1)} ;
+            \draw[fill=red,line width=0] (1,0) circle (0.1) node[anchor=north west]{(2)};
+
+            \node(T1) at (0,-2) {
+                \begin{tabular}{cccc}
+                \toprule
+                    Nó & $\xi$ & $\eta$ & $\zeta$ \\ \midrule
+                    (1)& -1 & 0 & 0\\
+                    (2)& 1 & 0 & 0 \\ \bottomrule
+                \end{tabular}
+            };
+            \node() at (0,-4) {(a)};
+        \end{scope}
+
+        \begin{scope}[shift={(5,0)}]
+            \draw[thick](-1,0.5) rectangle (1,-0.5);
+            \draw[-stealth] (0,0) -- (1.5,0) node[right]{$\xi$};
+            \draw[-stealth] (0,0) -- (0,0.75) node[right]{$\eta$};
+            \draw[fill=red,line width=0] (-1,0) circle (0.1) node[anchor=north east]{(1)} ;
+            \draw[fill=red,line width=0] (0,0) circle (0.1) node[anchor=north]{(2)};
+            \draw[fill=red,line width=0] (1,0) circle (0.1) node[anchor=north west]{(3)};
+
+            \node(T2) at (0,-2) {
+                \begin{tabular}{cccc}
+                \toprule
+                    Nó & $\xi$ & $\eta$ & $\zeta$ \\ \midrule
+                    (1)& -1 & 0 & 0\\
+                    (2)& 0 & 0 & 0 \\ 
+                    (3)& 1 & 0 & 0 \\ \bottomrule
+                \end{tabular}
+            };
+            \node() at (0,-4) {(b)};
+        \end{scope}
+        
+    \end{tikzpicture}

@@ -1,0 +1,70 @@
+\begin{tikzpicture}[x=1mm,y=-1mm,scale=0.7]
+          %\begin{scope}[cm={{0.26458,0.0,0.0,0.26458,(123.922,-98.3844)}}]
+
+
+          % TRILHO
+    \path[draw=black,line width=0.25mm,miter limit=4.00] (10.1876,167.3489) ..
+      controls (10.6411,163.8244) and (12.0714,160.4969) .. (14.3169,157.7426) ..
+      controls (15.3564,156.4676) and (16.7665,155.5470) .. (18.3520,155.1082) --
+      (30.0196,151.8795) .. controls (33.5845,150.8930) and (35.9876,147.5651) ..
+      (35.8028,143.8709) -- (34.9040,125.9056) .. controls (34.6167,120.1643) and
+      (30.9168,115.1544) .. (25.5141,113.1911) .. controls (22.2889,112.0191) and
+      (18.8951,111.3777) .. (15.4647,111.2918) .. controls (9.5371,111.1434) and
+      (3.6068,111.1434) .. (-2.3208,111.2915) .. controls (-8.2484,111.4397) and
+      (-14.1714,111.7361) .. (-20.0842,112.1805) .. controls (-23.5060,112.4377) and
+      (-26.8635,113.2478) .. (-30.0261,114.5795) .. controls (-35.3239,116.8103) and
+      (-38.7690,121.9989) .. (-38.7690,127.7473) -- (-38.7690,145.7351) .. controls
+      (-38.7690,149.4339) and (-36.2026,152.6376) .. (-32.5929,153.4447) --
+      (-20.7785,156.0864) .. controls (-19.1731,156.4454) and (-17.7188,157.2944) ..
+      (-16.6169,158.5160) .. controls (-14.2366,161.1546) and (-12.6418,164.4064) ..
+      (-12.0128,167.9039);
+
+
+    % RODA
+    \path[draw=black,line width=0.25mm,miter limit=4.00] (60.6913,92.7771) ..
+      controls (60.6913,101.2367) and (54.0575,108.2102) .. (45.6084,108.6323) --
+      (-24.5062,112.1353) .. controls (-30.7689,112.4309) and (-36.8618,114.2677) ..
+      (-42.2445,117.4826) .. controls (-45.4711,119.4161) and (-47.8050,122.5441) ..
+      (-48.7398,126.1876) -- (-49.6400,129.5476) .. controls (-50.0558,131.0987) and
+      (-50.8571,132.5195) .. (-51.9693,133.6780) .. controls (-55.2644,137.1298) and
+      (-59.8285,139.0827) .. (-64.6006,139.0827) .. controls (-70.9745,138.8046) and
+      (-76.5627,134.7379) .. (-78.7873,128.7583) .. controls (-81.3167,123.9858) and
+      (-83.2568,118.9236) .. (-84.5650,113.6831);
+
+
+        % EIXOS
+    \coordinate (CP) at (-10.06,111.14);
+    \path[draw=black,line cap=butt,line join=miter,line width=0.18mm,miter
+      limit=4.00,stealth-] (-52.3695,113.1004) node[anchor=east]{$\eta$} -- (CP);
+    \path[draw=black,line cap=butt,line join=miter,line width=0.18mm,miter
+      limit=4.00,-stealth] (CP) node[anchor=north]{$P_C$} -- (-12.1023,68.7394) node[anchor=east]{$\zeta$};
+    \path[draw=black,line cap=butt,line join=miter,line width=0.18mm,miter
+          limit=4.00,{Circle[length=4pt,sep=-2pt]}-stealth] 
+          (CP) -- +(-15:30) node[anchor=west]{$\xi$};
+
+    % CORTE DA RODA
+      \draw[rotate=1.43,dashed] (-13.1,78.6) +(14,0) arc(0:-30:14mm and 32.8mm) coordinate (D) arc (-30:-140:14mm and 32.8mm) ;
+      \draw[rotate=1.43, line width=0.18mm, Rays-stealth] (-13.1,30.6) -- (D) node[midway,fill=white] {$R_{\xi 1}$};
+
+    \path[draw=black,line cap=butt,line join=miter,line width=0.18mm,miter
+      limit=4.00,stealth-Rays] (-0.9803,111.2606) -- (-0.5323,142.6009) node[midway,fill=white]{$R_{\eta 2}$} -- (3.6592,140.9944) --
+      (4.2246,167.6664);
+
+
+    % área de contato
+    \begin{scope}[shift={(60,50)},scale=1.5]
+        \draw[pattern=north west lines] (0,0) ellipse[x radius = 10, y radius = 5];
+        \draw[line width = 0.18mm,-stealth] (0,0) -- (-14,0) node[anchor=east]{$\eta$};
+        \draw[line width = 0.18mm,-stealth] (0,0) -- (0,-8) node[anchor=south]{$\xi$};
+
+        \draw[suporte] (-10,0) -- +(0,8) coordinate (A1);
+        \draw[suporte] (10,0) -- +(0,8) coordinate (A2);
+        \draw[cota] (A1) -- (A2) node[midway, anchor=north]{$2a$};
+
+        \draw[suporte] (0,5) -- +(13,0) coordinate (A1);
+        \draw[suporte] (0,-5) -- +(13,0) coordinate (A2);
+        \draw[cota] (A1) -- (A2) node[midway, anchor=west]{$2a$};
+    \end{scope}
+
+
+    \end{tikzpicture}

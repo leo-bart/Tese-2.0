@@ -1,0 +1,13 @@
+
+\makeatletter
+
+\providecommand{\imprimirfichacatalografica}{}
+\renewcommand{\imprimirfichacatalografica}{
+	\begin{fichacatalografica}
+		\includepdf{Pretextual/ficha-catalografica.pdf}
+	\end{fichacatalografica}
+\makeatother
+	}
+
+
+

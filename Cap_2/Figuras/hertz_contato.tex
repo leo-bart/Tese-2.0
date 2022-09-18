@@ -1,0 +1,68 @@
+\begin{tikzpicture}[scale=0.4]
+  \path[draw=black,dashdotted,line
+    cap=butt,line join=miter,line width=0.025pt,miter limit=4.00] (-10,0.0)
+    -- (10.,0.0) node[anchor=west] {$x$};
+
+
+
+  \path[draw=black,dashdotted,line
+    cap=butt,line join=miter,line width=0.021pt,miter limit=4.00] (0.0,-10)
+    -- (0.0,10) node[anchor=south]{$z$};
+
+
+    % SUPERFÍCIES NÃO DEFORMADAS
+  \path[draw=black,dashed,fill opacity=1.000,draw
+    opacity=0.933,line join=round,line width=0.15mm,miter limit=4.00]
+    (8.9266,-5)arc(21.067:158.933:9.566)
+    node[pos=0.43,circle,draw,fill=black,scale=0.2](A2){};
+  \path[scale=-1.000,draw=black,dashed,fill opacity=1.000,draw
+    opacity=0.933,line join=round,line width=0.15mm,miter limit=4.0]
+    (8.9266,-5)arc(21.067:158.933:9.566)
+    node[pos=0.57,circle,draw,fill=black,scale=0.2](A1){};
+
+    \coordinate (O) at (0,0);
+
+    \node[anchor=north] at (A1) {$A_1$};
+    \node[anchor=south east] at (A2) {$A_2$};
+
+    \draw[-stealth] (A1) -- (A1|-O) node[midway,anchor=east]{$\vec{w}_1$};;
+    \draw[-stealth] (A2) -- (A2|-O) node[anchor=south west]{$\vec{w}_2$};
+
+
+    % SUPERFÌCIES DEFORMADAS
+  \path[draw=black,fill opacity=1.000,draw opacity=0.933,line join=round,line
+    width=0.25mm] (8.9266,-5) arc(21.067:55:9.566) to[out=145, in=0] (3.3,0.0) -- (0.0,0.0);
+    \path[xscale=-1,draw=black,fill opacity=1.000,draw opacity=0.933,line join=round,line
+    width=0.25mm] (8.9266,-5) arc(21.067:55:9.566) to[out=145, in=0] (3.3,0.0) -- (0.0,0.0);
+
+    \path[yscale=-1,draw=black,fill opacity=1.000,draw opacity=0.933,line join=round,line
+    width=0.25mm] (8.9266,-5) arc(21.067:55:9.566) to[out=145, in=0] (3.3,0.0) -- (0.0,0.0);
+    \path[scale=-1,draw=black,fill opacity=1.000,draw opacity=0.933,line join=round,line
+    width=0.25mm] (8.9266,-5) arc(21.067:55:9.566) to[out=145, in=0] (3.3,0.0) -- (0.0,0.0);
+
+  
+
+
+    % RAIOS
+  \path[draw=black,line join=miter,line width=0.15mm,miter
+    limit=4.00,{Circle[length=2pt,sep=-1pt]}-stealth] (0.000,-8.4386) node[anchor=north east]{$M_2$} -- +(130:9.566) node[midway,fill=white]{$R_{x2}$};
+  \path[draw=black,line join=miter,line width=0.15mm,{Circle[length=2pt,sep=-1pt]}-stealth] (0.0000,8.4386) node[anchor=south east]{$M_1$} -- +(-130:9.566) 
+    node[midway,fill=white]{$R_{x1}$};
+
+  % APROXIMAÇÃO
+  \draw[{Circle[length=3pt,sep=-1.5pt,fill=none]}-stealth,line width=0.15mm] (0.0,-9.566) -- (0.000,-8.4386)
+    node[midway,anchor=west]{$\delta_2$};
+  \draw[{Circle[length=3pt,sep=-1.5pt,fill=none]}-stealth,line width=0.15mm] (0.0,9.566) -- (0.000,8.4386)
+    node[midway,anchor=west]{$\delta_1$};
+
+    % ÁREA DE CONTATO
+    \draw[suporte] (-3.3,0) -- +(0,-3) coordinate (E1);
+    \draw[suporte] (3.3,0) -- +(0,-3) coordinate (E2);
+    \draw[cota] (E1) -- (E2) node[midway,fill=white]{$2a$};
+
+    % LEGENDA
+    \begin{scope}[shift={(5,7)}]
+        \draw[dashed] (0,1) -- (2,1) node[anchor=west]{Superfície não-deformada};
+        \draw[line width=0.25mm] (0,0) -- (2,0) node[anchor=west]{Superfície deformada};
+    \end{scope}
+\end{tikzpicture}   

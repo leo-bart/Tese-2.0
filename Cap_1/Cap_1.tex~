@@ -1,0 +1,42 @@
+\chapter{Introdução}
+\lipsum
+
+\begin{table}
+	\centering
+	\caption{Exemplo de tabela}
+	\label{Tab:Tab1}
+	\begin{tabular}{cccc}
+		\hline
+		\multicolumn{2}{c}{Coluna 1} & Coluna 3 & Coluna 4 \\
+		\hline
+		XXXXX & XXXXX & XX & XX\\
+		\hline
+		XXXXX & XXXXX & XX & XX\\
+		\hline
+		XXXXX & XXXXX & XX & XX\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\textcolor{red}{Exemplo para referenciar tabelas como a Tabela \ref{Tab:Tab1}}\\
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{Cap_1/Figuras_Cap_1/Cap1Fig1.jpeg}
+	\caption{Exemplo de figura}
+	\label{Fig:Fig1}
+\end{figure}
+
+\textcolor{red}{Exemplo de citação direta: Segundo
+\citeonline{oman_overfeed_1999} XXXX.}\\
+
+\textcolor{red}{Exemplo de citação indireta: XXXX, XXXXX XXXX XXXXX
+\cite{van_der_lans_modelling_2000,porteiro_experimental_2010,royo_experimental_2019}.}\\
+
+\lipsum
+
+\lipsum
+
+\lipsum
+
+\lipsum

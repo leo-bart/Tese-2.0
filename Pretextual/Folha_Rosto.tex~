@@ -1,0 +1,57 @@
+%IMPRESSÃO DE MENSAGEM EM FOLHA DE ROSTO
+\preambulo{%
+\imprimirtipotrabalho \ apresentada à \imprimirfaculdade \ da
+\imprimirinstituicao \ como parte dos requisitos exigidos para a obtenção do
+título de \imprimirtituloobtido \ em Engenharia Mecânica, na Área de
+\imprimirAreaConcentracao \ no âmbito do Acordo de Cotutela firmado entre a Unicamp e NOME DA INSTITUIÇÃO.
+% (acrescentar essa informação, no caso de
+%cotutela internacional ou deletar se não for o caso de cotutela)
+}
+
+\makeatletter
+\renewcommand{\folhaderostocontent}{
+	\begin{center}
+		{\textbf{\MakeUppercase{\imprimirautor}}}\\
+		\vspace*{\fill}
+		\LARGE\textbf{{\imprimirtitulo}}\\
+	\end{center}
+	\vspace*{\fill}
+	
+	\abntex@ifnotempty{\imprimirpreambulo}{%
+		\hspace{.35\textwidth}
+		\begin{minipage}{.5\textwidth}
+			\SingleSpacing
+			\imprimirpreambulo
+		\end{minipage}%
+		\vspace*{\fill}
+		}%
+		
+	\vspace*{1cm}
+	
+	\noindent
+	Orientador: \imprimirorientadorrotulo \ \imprimirorientador\par
+	\noindent
+	\abntex@ifnotempty{\imprimircoorientador}
+		{Coorientador: \imprimircoorientadorrotulo~ \imprimircoorientador}
+		\vspace*{1cm}
+		
+		\noindent
+		\begin{minipage}{0.5\textwidth}\SingleSpacing
+			ESTE TRABALHO CORRESPONDE À VERSÃO FINAL DA
+			\MakeUppercase{\imprimirtipotrabalho} DEFENDIDA
+			PELO ALUNO \MakeUppercase{\imprimirautor}, E
+			ORIENTADA PELO
+			\MakeUppercase{\imprimirorientadorrotulo \ \imprimirorientador}. 
+		\end{minipage}
+
+		\vspace*{\fill}
+
+		\begin{center}
+			{\imprimircidade}
+			\par
+
+			{\imprimirano}
+			\vspace*{1cm}
+		\end{center}
+}
+\makeatother

@@ -1,0 +1,119 @@
+\input{preambulo.tex}
+
+\begin{document}
+%---------------------------------
+%\selectlanguage{english} 	%Alterar o idioma padrão do documento
+%---------------------------------
+
+%--------------------------------------------------------------------------
+%ELEMENTOS PRETEXTUAIS
+%--------------------------------------------------------------------------
+%--------------------------------------------------------------------------
+
+\frontmatter
+\pretextual
+
+\imprimircapa
+
+\setcounter{page}{2}
+% acerta a numeração de páginas de acordo com as regras da PRPG,
+% pois a numeração deve ser contínua e iniciar-se a partir da folha de capa.
+% Sem este comando, a numeração inicia-se novamente na folha de rosto.
+% Para impressão em frente e verso (two-side), este comando deve ser anulado.
+
+\imprimirfolhaderosto
+
+%\imprimirfolhaderosto*
+% se a opção twoside for estabelecida, usar o comando \imprimirfolhaderosto* 
+% para garantir que a ficha catalográfica fique no verso da folha de rosto
+% a opção twoside ou one side é estabelecida no primeiro comando do
+% do arquivo preambulo.tex
+
+\imprimirfichacatalografica
+
+\imprimirfolhadeaprovacao
+
+\input{Pretextual/dedicatoria.tex}
+
+\input{Pretextual/agradecimentos.tex}
+
+\input{Pretextual/resumo.tex}
+
+\input{Pretextual/abstract.tex}
+
+%--------------------------------------------------------------------------
+%LISTAS DE FIGURAS, TABELAS E SÍMBOLOS
+%--------------------------------------------------------------------------
+% --- inserir lista de ilustrações ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+%--------------------------------------------------------------------------
+% --- inserir lista de tabelas ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+%--------------------------------------------------------------------------
+% caso precise da lista de símbolos e siglas, editar os arquivos "Lista_Siglas.tex" e
+%"Lista_Simbolos.tex" no diretório "Pretextual"
+
+%-- inserir lista de siglas
+\input{Pretextual/Lista_Siglas.tex}
+
+%-- inserir lista de símbolos
+\input{Pretextual/Lista_Simbolos.tex}
+
+%--------------------------------------------------------------------------
+%SUMÁRIO
+%--------------------------------------------------------------------------
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+%--------------------------------------------------------------------------
+
+\setcounter{page}{\thepage}%INICIAR IMPRESSÃO DE PÁGINAS APÓS PÁGINAS PRETEXTUAIS
+%--------------------------------------------------------------------------
+%ELEMENTOS TEXTUAIS
+%--------------------------------------------------------------------------
+%Para capítulos adicionais, recomenda-se criar um arquivo em diretório separado
+%com mesmo nome.tex.
+\textual
+
+\input{Cap_1/Cap_1.tex}
+
+\input{Cap_2/Cap_2.tex}
+
+\input{Cap_3/Cap_3.tex}
+
+\input{Cap_4/Cap_4.tex}
+
+\input{Cap_5/Cap_5.tex}
+
+\input{Cap_6/Cap_6.tex}
+
+%--------------------------------------------------------------------------
+%ELEMENTOS PÓS-TEXTUAIS
+%--------------------------------------------------------------------------
+\postextual
+%BIBLIOGRAFIA
+%--------------------------------------------------------------------------
+%\bibliographystyle{plainnat}
+%\bibliographystyle{abntex2-alf}
+\bibliographystyle{abntex2-alf-VerUnicamp}
+\bibliography{references.bib}
+%--------------------------------------------------------------------------
+%APÊNDICES
+\begin{apendicesenv}
+	\partapendices %GERA UMA PÁGINA EM BRANCO COM A PALAVRA APÊNDICE
+	\input{Apendice/ApendiceA.tex}
+	\input{Apendice/ApendiceB.tex}
+\end{apendicesenv}
+%--------------------------------------------------------------------------
+%ANEXOS
+\begin{anexosenv}
+	\partanexos
+	\input{Anexos/AnexoA.tex}
+        %\input{Anexos/AnexoB.tex}
+\end{anexosenv}
+%--------------------------------------------------------------------------
+\end{document}

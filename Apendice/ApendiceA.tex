@@ -1,0 +1,150 @@
+\chapter{Dedução da matriz de massa na formulação em coordenadas
+flutuantes \label{ch:apendice A}}
+
+Na FCF a posição de um ponto qualquer em um corpo flexível é dada por
+\begin{equation}
+ \vec{r} = \vec{r}_O +  \tens{A}(\vec{u}^* + \vec{w}^*) \label{eq-ApA: posição}
+\end{equation}
+em que o sobrescrito $^*$ indica que o vetor está representado em coordenadas
+locais, enquanto sua ausência denota coordenadas globais. Derivando a relação
+\eqref{eq-ApA: posição}, encontra-se para a velocidade:
+\begin{equation}
+ \dot{\vec{r}} = \dot{\vec{r}}_O +  \dot{\tens{A}}(\vec{u}^* + \vec{w}^*) +
+\tens{A}\vec{w}^* \label{eq-ApA: velocidade}
+\end{equation}
+
+A energia cinética é dada pela integral
+\begin{equation}
+ \mathcal{T} = \frac{1}{2} \int{\rho \tp{\dot{\vec{r}}} \dot{\vec{r}} \, dV}
+\end{equation}
+que envolve a norma ao quadrado do vetor $\dot{\vec{r}}$. Lembrando que
+$\dot{\tens{A}}\tp{\tens{A}} = \tilde{\vec{\omega}}$, essa última quantidade
+pode ser calculada como
+\begin{align}
+ \tp{\dot{\vec{r}}}\dot{\vec{r}} =&  \tp{\dot{\vec{r}}}_O\dot{\vec{r}}_O
++ \tp{\dot{\vec{r}}}_O \tilde{\vec{\omega}}(\vec{u} + \vec{w}) +
+\tp{\dot{\vec{r}}}_O \dot{\vec{w}} - \\
+&(\tp{\vec{u}} + \tp{\vec{w}})\tilde{\vec{\omega}}\dot{\vec{r}}_O -
+(\tp{\vec{u}}
++ \tp{\vec{w}})\tilde{\vec{\omega}}\tilde{\vec{\omega}}(\vec{u} + \vec{w})
+- (\tp{\vec{u}} + \tp{\vec{w}})\tilde{\vec{\omega}}\dot{\vec{w}} + \\
+&\tp{\dot{\vec{w}}}\dot{\vec{r}}_O +
+\tp{\dot{\vec{w}}}\tilde{\vec{\omega}}(\vec{u}+\vec{w}) +
+\tp{\dot{\vec{w}}}\dot{\vec{w}} \label{eq:apA - rr passo 1}
+\end{align}
+
+Na FCF, o campo de deslocamentos é localmente expresso como $\vec{w}
+= \vec{S}\vec{e}$, com  $\vec{S}$ sendo a matriz com funções de forma e
+$\vec{e}$, as coordenadas nodais em relação ao sistema local de coordenadas.
+Define-se um vetor de coordenadas generalizadas tal que:
+\begin{equation}
+ \vec{q}_f = \tp{\begin{bmatrix}
+                      \tp{\vec{r}}_O & \tp{\vec{\theta}} & \tp{e}
+                     \end{bmatrix}}
+\end{equation}
+em que $\vec{\theta}$ são os parâmetros de rotação do sistema local em relação
+ao global. Independentemente de quais esses parâmetros, existe uma relação
+linear entre suas derivadas e a velocidade angular $\vec{\omega}$:
+\begin{equation}
+ \vec{\omega} = \vec{G}\dot{\vec{\theta}} \label{eq-ApA:theta-pt para omega}
+\end{equation}
+
+Para facilitar a montagem da matriz de massa, definem-se as matrizes simétricas
+auxiliares $\vec{N}_{11}$, $\vec{N}_{22}$ e $\vec{N}_{33}$:
+\begin{align}
+ \vec{N}_{11} = \begin{bmatrix}
+            \vec{E} & \vec{0} & \vec{0} \\
+            \vec{0} & \vec{0} & \vec{0}\\
+            \vec{0} & \vec{0} & \vec{0}
+           \end{bmatrix},
+ \vec{N}_{22} = \begin{bmatrix}
+            \vec{0} & \vec{0} & \vec{0} \\
+            \vec{0} & \vec{E} & \vec{0}\\
+            \vec{0} & \vec{0} & \vec{0}
+           \end{bmatrix},
+ \vec{N}_{33} = \begin{bmatrix}
+            \vec{0} & \vec{0} & \vec{0} \\
+            \vec{0} & \vec{0} & \vec{0}\\
+            \vec{0} & \vec{0} & \vec{E}
+           \end{bmatrix}
+\end{align}
+
+Utilizando a relação \eqref{eq-ApA:theta-pt para omega} e $\vec{N}_{22}$ vem
+que
+\begin{subequations}
+\label{eq-apA:relações entre velocidades generalizadas}
+\begin{align}
+ \dot{\vec{r}} &= \vec{N}_{11} \dot{\vec{q}}_f \label{eq-apA:r = Nq}\\
+ \dot{\vec{\theta}} &= \vec{G}\vec{N}_{22} \dot{\vec{q}}_f  \label{eq-apA:omega
+= Nq}\\
+ \dot{\vec{e}} &= \vec{N}_{33} \dot{\vec{q}}_f \label{eq-apA:e = Nq}
+\end{align}
+\end{subequations}
+
+A partir das Eqs.~\eqref{eq-apA:r = Nq}, \eqref{eq-apA:omega = Nq} e
+\eqref{eq-apA:e = Nq}, a multiplicação de velocidades apresentada em
+\eqref{eq:apA - rr passo 1} pode ser reformulada:
+\begin{align}
+ \tp{\dot{\vec{r}}}\dot{\vec{r}} =&
+\tp{\dot{\vec{q}}}_f \vec{N}_{11} \dot{\vec{q}}_f + \\&
++\tp{\dot{\vec{q}}}_f \vec{N}_{11} \tilde{\vec{\omega}} (\vec{u} +
+\vec{S}\vec{N}_{33}\vec{q}_f) + \\&
++\tp{\dot{\vec{q}}}_f \vec{N}_{11}\vec{S}\vec{N}_{33}\dot{\vec{q}}_f + \\&
+-(\tp{\vec{u}} + \tp{\vec{q}}_f\vec{N}_{33}\tp{\vec{S}})
+\tilde{\vec{\omega}} \vec{N}_{11} \dot{\vec{q}}_f + \\&
+-(\tp{\vec{u}} + \tp{\vec{q}}_f\vec{N}_{33}\tp{\vec{S}})
+\tilde{\vec{\omega}}\tilde{\vec{\omega}}(\vec{u} +
+\vec{S}\vec{N}_{33}\vec{q}_f) +\\&
+-(\tp{\vec{u}} + \tp{\vec{q}}_f\vec{N}_{33}\tp{\vec{S}})
+\tilde{\vec{\omega}}\vec{S}\vec{N}_{33}\dot{\vec{q}}_f + \\&
++
+\tp{\dot{\vec{q}}}_f\vec{N}_{33}\tp{\vec{S}}\vec{N}_{11}\dot{\vec{q}}_f
++ \\&
++
+\tp{\dot{\vec{q}}}_f\vec{N}_{33}\tp{\vec{S}}\tilde{\vec{\omega}}(\vec{u
+} + \vec{S}\vec{N}_{33}\vec{q}_f) + \\&
++\tp{\dot{\vec{q}}}_f\vec{N}_{33}\tp{\vec{S}}\vec{S}\vec{N}_{33}\dot{
+\vec{q}}_f
+\end{align}
+
+Substutuindo a expressão acima na equação da energia cinética e utilizando a
+propriedade do produto vetorial $\tilde{\vec{\omega}}\vec{v} = -
+\tilde{\vec{v}}\vec{\omega}$ chega-se a:
+\begin{align}
+ \mathcal{T} = \frac{1}{2} \tp{\dot{\vec{q}}_f} {\vec{M}^*}
+\dot{\vec{q}}_f = \frac{1}{2} \tp{\dot{\vec{q}}_f} \begin{bmatrix}
+           \vec{M}^*_{11} & \vec{M}^*_{12} & \vec{M}^*_{13} \\
+	   \vec{M}^*_{12} & \vec{M}^*_{22} & \vec{M}^*_{23} \\
+           \vec{M}^*_{13} & \vec{M}^*_{23} & \vec{M}^*_{33}
+           \end{bmatrix}
+\dot{\vec{q}}_f
+\end{align}
+em que as matrizes $\vec{M}^*_{ij}$ são funções das coordenadas
+generalizadas $\vec{q}_f$ dadas por:
+\begin{align}
+ \vec{M}^*_{11} &= m\vec{E} \\
+ \vec{M}^*_{12} &= - \int{\rho \, \mathcal{A}({\vec{u} +
+\vec{S}\vec{N}_{33}\vec{q}_f})\vec{G}dV} \\
+ \vec{M}^*_{13} &= \int{\rho \vec{S} dV} \\
+ \vec{M}^*_{22} &= - \int{\rho \tp{\vec{G}}
+\,\mathcal{A}(\tp{\vec{u}} + \tp{\vec{q}}_f \vec{N}_{33}
+\tp{\vec{S}}) \mathcal{A}(\vec{u} + \vec{S}\vec{N}_{33}\vec{q}_f)\vec{G}
+dV} \\
+ \vec{M}^*_{23} &= - \int{\rho \, \mathcal{A}(\vec{u} +
+\vec{S}\vec{N}_{33}\vec{q}_f)\vec{G}dV} \\
+ \vec{M}^*_{33} &= \int{\rho \tp{\vec{S}}\vec{S}dv}
+\end{align}
+Nas equações acima, o operador $\mathcal{A}(\vec{x}) = \tilde{\vec{x}}$ é a representação antissimétrica do vetor $\vec{x}$.
+
+Note-se que ${\vec{M}^*}$ depende apenas da posição, mas não da
+velocidade. Por isso, mesmo não sendo constante, tal matriz ainda pode ser entendida como uma matriz de massa, uma
+vez que multiplicará as acelerações após o cálculo do valor estacionário da
+função Lagrangeana.
+
+
+
+
+
+
+
+

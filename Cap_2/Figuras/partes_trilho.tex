@@ -1,0 +1,37 @@
+\begin{tikzpicture}[x=1in,y=1in,scale=0.3]
+        \begin{scope}[rotate around={1.43:(0,0)},shift={(0,0)}]
+            \draw[thick,pattern=north west lines] (0,0) -- (3-1/16,0) arc (270:360:1/16) -- (3,7/16) arc (0:75.964:1/8) -- 
+            (1.042,0.927) arc (255.964:186.623:3/4) arc (186.623:180:20) arc (180:171.246:8)
+            arc (171.246:139.418:3/4) arc (139.418:104.036:5/16) -- (1.233,5.682)
+            arc (-75.964:1.432:5/16) -- (1.449,6.756) arc (1.432:68.597:9/16) arc (68.597:87.134:1.25) 
+            arc (87.134:90:14);
+            \draw[thick,xscale=-1,pattern=north west lines] (0,0) -- (3-1/16,0) arc (270:360:1/16) -- (3,7/16) arc (0:75.964:1/8) -- 
+            (1.042,0.927) arc (255.964:186.623:3/4) arc (186.623:180:20) arc (180:171.246:8)
+            arc (171.246:139.418:3/4) arc (139.418:104.036:5/16) -- (1.233,5.682)
+            arc (-75.964:1.432:5/16) -- (1.449,6.756) node (A) {} arc (1.432:68.597:9/16) arc (68.597:87.134:1.25) 
+            arc (87.134:90:14);
+        \end{scope}
+
+        \begin{scope}[rotate around={-1.43:(-10,0)},shift={(-10,0)}]
+            \draw[thick,pattern=north west lines] (0,0) -- (3-1/16,0) arc (270:360:1/16) -- (3,7/16) arc (0:75.964:1/8) -- 
+            (1.042,0.927) arc (255.964:186.623:3/4) arc (186.623:180:20) arc (180:171.246:8)
+            arc (171.246:139.418:3/4) arc (139.418:104.036:5/16) -- (1.233,5.682)
+            arc (-75.964:1.432:5/16) -- (1.449,6.756) node (B) {} arc (1.432:68.597:9/16) arc (68.597:87.134:1.25) 
+            arc (87.134:90:14);
+            \draw[thick,xscale=-1,pattern=north west lines] (0,0) -- (3-1/16,0) arc (270:360:1/16) -- (3,7/16) arc (0:75.964:1/8) -- 
+            (1.042,0.927) arc (255.964:186.623:3/4) arc (186.623:180:20) arc (180:171.246:8)
+            arc (171.246:139.418:3/4) arc (139.418:104.036:5/16) -- (1.233,5.682)
+            arc (-75.964:1.432:5/16) -- (1.449,6.756) arc (1.432:68.597:9/16) arc (68.597:87.134:1.25) 
+            arc (87.134:90:14);
+        \end{scope}
+
+        \draw[suporte] (A) -- +(0,1) node (A1) {};
+        \draw[suporte] (B) -- +(0,1) node (B1) {};
+        \draw[cota] (A1) -- (B1) node[midway, anchor=south] {Bitola};
+
+        \draw[thick] (-10,0) +(178.57:4) -- +(-1.43:4.5) (0,0) +(1.43:4) -- (181.43:4.5) -- +(-1,0);
+
+        \draw [decorate, decoration = {brace,mirror}] (3.2,0) --  (3.2,1.2) node[anchor=west, midway] {Patim} ;
+        \draw [decorate, decoration = {brace,mirror}] (3.2,1.2) -- (3.2,5.5) node[anchor=west, midway] {Alma};
+        \draw [decorate, decoration = {brace,mirror}] (3.2,5.5) -- (3.2,7.313) node[anchor=west, midway] {Boleto};
+    \end{tikzpicture}

@@ -1,0 +1,126 @@
+%%
+%% ADAPTAÇÃO do pacote abnTeX2 (http://abnTeX2.googlecode.com) 
+%% para a Faculdade de Engenharia Mecânica, da  
+%% UNICAMP-Universidade Estadual de Campinas
+%% Esta adaptação foi feita a partir do trabalho abaixo:
+%%
+%%-------------------------------------------------------------------------
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Daniel Guerreiro e Silva, Filipe Ieda Fazanaro e Marcos Covre,
+%% daniel.guerreiro@gmail.com
+%%
+%% Further information about abnTeX2 are available on http://abntex2.googlecode.com/
+%%
+
+% ----------------------------------------------------------------------------------------------------
+% INICIO DA ADAPTAÇÃO PARA A FEM-UNICAMP
+% ----------------------------------------------------------------------------------------------------
+% ---
+%ENTRADA DE DADOS PARA ELEMENTOS PRETEXTUAIS
+% ---
+%IMPRESSÃO DO ANO
+%\providecommand{\imprimirAno}{}
+%\newcommand{\ano}[1]{\renewcommand{\imprimirano}{#1}}
+% ---
+%IMPRESSÃO DO DEPARTAMENTO 
+\providecommand{\imprimirDepartamento}{}
+\newcommand{\Departamento}[1]{\renewcommand{\imprimirDepartamento}{#1}}
+% ---
+%IMPRESSÃO DA AREA DE CONCENTRAÇÃO
+\providecommand{\imprimirAreaConcentracao}{}
+\newcommand{\AreaConcentracao}[1]{\renewcommand{\imprimirAreaConcentracao}{#1}}
+% ---
+%IMPRESSÃO DO NOME DA FACULDADE
+\providecommand{\imprimirfaculdade}{}
+\newcommand{\faculdade}[1]{\renewcommand{\imprimirfaculdade}{#1}}
+% ---
+%IMPRESSÃO DO TIPO DE TÍTULO
+\providecommand{\imprimirtituloobtido}{}
+\newcommand{\tituloObtido}[1]{\renewcommand{\imprimirtituloobtido}{#1}}
+% ---
+%IMPRESSÃO DO ROTULO DO ORIENTADOR
+\providecommand{\imprimirorientadorrotulo}{}
+\newcommand{\orientadorrotulo}[1]{\renewcommand{\imprimirorientadorrotulo}{#1}}
+% ---
+%IMPRESSÃO DO RÓTULO DO COORIENTADOR
+\providecommand{\imprimircoorientadorrotulo}{}
+\newcommand{\coorientadorrotulo}[1]{\renewcommand{\imprimircoorientadorrotulo}{#1}}
+% ---
+%IMPRESSAO DO LOCAL (CIDADE)
+\providecommand{\imprimircidade}{}
+\newcommand{\cidade}[1]{\renewcommand{\imprimircidade}{#1}}
+% ---
+%IMPRESSÃO DO ANO 
+\providecommand{\imprimirano}{}
+\newcommand{\ano}[1]{\renewcommand{\imprimirano}{#1}}
+%----------------------------------------------------------------------------------------------------
+\input{DadosTrabalho} %Carrega as informações contidas no arquivo DadosTrabalho.tex para a impressão da folha de rosto
+%----------------------------------------------------------------------------------------------------
+%MARGENS DO DOCUMENTO
+%----------------------------------------------------------------------------------------------------
+%\setlrmarginsandblock{2cm}{3cm}{*} %Margens direita e esquerda
+%\setulmarginsandblock{3cm}{2cm}{*} %Margens superior e inferior
+%\checkandfixthelayout
+%----------------------------------------------------------------------------------------------------
+%CONFIGURAÇÃO DA NUMERAÇÃO
+%----------------------------------------------------------------------------------------------------
+%\renewcommand{\pretextual}{%
+%  \aliaspagestyle{titlingpage}{plain}%mostrar num. na capa
+%  \aliaspagestyle{chapter}{empty}% customizing chapter pagestyle
+%  \pagestyle{empty}
+%  \aliaspagestyle{cleared}{empty}% mostrar num. em pag. em branco, coloque plain, c.c. empty
+%  \aliaspagestyle{part}{empty}
+%}
+\makepagestyle{abntheadings}
+\makeevenhead{abntheadings}{\ABNTEXfontereduzida\thepage}{}{\ABNTEXfontereduzida\textit\leftmark}
+\makeoddhead{abntheadings}{}{}{\ABNTEXfontereduzida\thepage}
+%----------------------------------------------------------------------------------------------------
+% CONFIGURAÇÃO DA CAPA
+%----------------------------------------------------------------------------------------------------
+\input{Pretextual/Capa.tex}
+%----------------------------------------------------------------------------------------------------
+%CONFIGURAÇÃO DA FOLHA DE ROSTO
+%----------------------------------------------------------------------------------------------------
+\input{Pretextual/Folha_Rosto.tex}
+%----------------------------------------------------------------------------------------------------
+%PAGINA FICHA CATALOGRÁFICA
+%----------------------------------------------------------------------------------------------------
+\input{Pretextual/Ficha_Catalografica.tex}
+%----------------------------------------------------------------------------------------------------
+%PÁGINA COM INFORMAÇÕES DA BANCA EXAMINADORA
+%----------------------------------------------------------------------------------------------------
+\input{Pretextual/Folha_Banca.tex}
+%----------------------------------------------------------------------------------------------------
+%CONFIGURAÇÃO DE COMANDOS 
+%----------------------------------------------------------------------------------------------------
+% ---
+%IMPRESSÃO DO TÍTULO DA TESE EM LINGUA ESTRANGEIRA
+\renewcommand{\tituloestrangeiro}[1]{\providecommand{\theforeigntitle}{#1}}
+\renewcommand{\imprimirtituloestrangeiro}{\theforeigntitle}
+% ---
+%IMPRESSÃO DO TÍTULO DO CURSO A  PARTIR DO TIPO DE TRABALHO
+%\providecommand{\imprimircurso}{}
+%\providecommand{\imprimirtipotrabalho}{}
+%\renewcommand{\tipotrabalho}[1]{
+%	\renewcommand{\imprimircurso}{
+%		\ifthenelse{\equal{#1}{Tese de Doutorado}}{Doutor}{Mestre}
+%		}
+%		\renewcommand{\imprimirtipotrabalho}{#1}
+%	}
+%----------------------------------------------------------------------------------------------------
+%CONFIGURAÇÕES DO PARÁGRAFO DO DOCUMENTO
+\setlength{\parindent}{2cm} %recuo na primeira linha de cada parágrafo
+\renewcommand{\baselinestretch}{1.5} %separação entre linhas de texto
+%\setlength\afterchapskip{\baselinestretch}
+% FIM DA ADAPTAÇÃO PARA A FEM-UNICAMP
+% ---
+

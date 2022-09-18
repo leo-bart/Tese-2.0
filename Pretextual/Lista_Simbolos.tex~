@@ -1,0 +1,20 @@
+\begin{simbolos}
+	\item[$\square$] Subscrito da base referencial
+	\item[$\triangle$] Subscrito da variável tratada
+	% LETRAS MENUSCULAS
+	\item[$\circ$] Coordenada de direção do vetor
+	\item[$a$] Distância entre olhal menor até centro de gravidade da biela
+	\item[$\vec{_{\square}a_{\triangle}}$] Aceleração da variável ${\triangle}$
+	\item[$c_v$] Coeficiente de amortecimento da válvula
+	\item[$d$] Diâmetro do pistão
+	\item[$f$] Frequência da rede elétrica
+	\item[$g$] Aceleração da gravidade
+	\item[$t$] Tempo
+	\item[$k$] Coeficiente de expansão adiabática
+	\item[$k_v$] Rigidez da válvula
+	\item[$l_c$] Comprimento do espaço morto
+	\item[$m_1$] Massa da manivela
+	\item[$m_2$] Massa da biela
+	\item[$m_3$] Massa do pistão
+\end{simbolos}
+

@@ -1,0 +1,49 @@
+\begin{tikzpicture}[scale=0.2,x=1in,y=1in]
+        \meiotrilho
+        \begin{scope}[xscale=-1,yscale=1]
+            \meiotrilho
+        \end{scope};
+
+        \draw[thick,-stealth] (-3,2.8) -- (3,2.8) node[anchor=west] {$\eta^\star$};
+        \draw[thick,-stealth] (0,1) -- (0,6) node[anchor=south] {$\zeta^\star$};
+
+
+        \begin{scope}[xshift=25cm]
+            % trilho simplificado
+            \coordinate (A) at (-68mm,0);
+            \coordinate (B) at (68mm,22mm);
+            \coordinate (C) at (-12mm,|-B);
+            \coordinate (D) at (12mm, 153.5mm);
+            \coordinate (E) at (-39.1mm,153.5mm);
+            \coordinate (F) at (39.1mm,7.3125);
+            
+            \draw[blue,pattern=north west lines, pattern color=blue] (A) rectangle (B);
+            \draw[blue,pattern=north west lines, pattern color=blue] (C) rectangle (D);
+            \draw[blue,pattern=north west lines, pattern color=blue] (E) rectangle (F);
+            
+            % dimensões
+            \draw[suporte] (A |- 0,0) -- +(0,-2);
+            \draw[suporte] (B |- A) -- +(0,-2);
+            \draw[cota] ( A |- 0,-2) -- +(136mm,0) node[midway,anchor=south]{$w_f = W$};
+
+            \draw[suporte] (B |- A) -- (150mm,0);
+            \draw[suporte] (B) -- (90mm,0 |- B);
+            \draw[cota] (90mm,0) -- (90mm,0 |- B) node[midway,anchor=west]{$h_f$};
+
+            \draw[cota] (90mm,0 |- B) -- (90mm,0 |- D) node[midway,anchor=west]{$h_w$};
+
+            \draw[suporte] (F |- D) -- (90mm,0 |- D);
+            \draw[suporte] (F) -- (150mm,0 |- F);
+            \draw[cota] (90mm,0 |- F) -- (90mm,0 |- D) node[midway, anchor=west]{$h_h$};
+
+            \draw[cota] (150mm,0 |- F) -- (150mm,0) node[midway, anchor=west]{$H$};
+
+            \draw[suporte] (E |- F) -- +(0,1);
+            \draw[suporte] (F) -- +(0,1);
+            \draw[cota] (F) +(0,1) -- +(-78.2mm,1) node[midway,anchor=south]{$w_h$};
+
+            \draw[cota] (-12mm,80mm) -- +(24mm,0);
+            \draw[suporte] (9mm,80mm) -- +(50mm,0) node[midway,anchor=south]{$w_w$};
+            
+        \end{scope}
+    \end{tikzpicture}
